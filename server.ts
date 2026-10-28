@@ -4630,48 +4630,10 @@ app.post('/api/verify-access', async (req, res) => {
 
 // --- TELEGRAM WEBHOOK & BOT COMMANDS INTEGRATION ---
 function getTelegramAppUrl(): string {
-  const isValidPublicUrl = (urlStr?: string): boolean => {
-    if (!urlStr || typeof urlStr !== 'string') return false;
-    const s = urlStr.trim();
-    if (!s.startsWith('https://') && !s.startsWith('http://')) return false;
-    if (s.includes('localhost') || s.includes('127.0.0.1')) return false;
-    if (s.includes('ais-dev-') || s.includes('ais-pre-') || s.includes('googleusercontent.com') || s.includes('europe-west2.run.app')) return false;
-    if (s.includes(':AAH') || s.includes(':AAG') || s.length < 10) return false;
-    return true;
-  };
-
-  try {
-    const settings = loadSettingsFromDisk();
-    if (settings && (settings as any).customAppUrl && isValidPublicUrl((settings as any).customAppUrl)) {
-      return (settings as any).customAppUrl.trim();
-    }
-  } catch (e) {}
-
-  if (process.env.RAILWAY_PUBLIC_DOMAIN) {
-    const domain = process.env.RAILWAY_PUBLIC_DOMAIN.trim().replace(/^https?:\/\//, '');
-    return `https://${domain}`;
-  }
-
-  if (process.env.RAILWAY_STATIC_URL) {
-    const domain = process.env.RAILWAY_STATIC_URL.trim().replace(/^https?:\/\//, '');
-    return `https://${domain}`;
-  }
-  
-  if (isValidPublicUrl(process.env.CUSTOM_APP_URL)) {
-    return process.env.CUSTOM_APP_URL!.trim();
-  }
-
-  if (isValidPublicUrl(process.env.TELEGRAM_MINI_APP_URL)) {
-    return process.env.TELEGRAM_MINI_APP_URL!.trim();
-  }
-
-  if (isValidPublicUrl(process.env.APP_URL)) {
-    return process.env.APP_URL!.trim();
-  }
-
-  // Active public URL for the mini-app (Vercel Production URL)
-  return 'https://the-hasman.vercel.app';
+  // STRICT OVERRIDE: official production URL requested by user
+  return 'https://the-hasman.vercel.app/';
 }
+
 
 function formatTelegramButton(label?: string, targetUrl?: string, fallbackLabel = "🛒 Accéder au Shop 🛍️"): any {
   const appUrl = getTelegramAppUrl();

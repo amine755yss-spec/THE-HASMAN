@@ -11,10 +11,10 @@
       "fes"
     ],
     "pricing": {
-      "100g": 350,
-      "50g": 200,
       "1kg": 2500,
-      "500g": 1500
+      "100g": 350,
+      "500g": 1500,
+      "50g": 200
     },
     "currency": "EUR",
     "price": 350,
@@ -33,7 +33,6 @@
     "id": "omerta-custom-1789426483100"
   },
   {
-    "isPremium": true,
     "cities": [
       "casablanca",
       "rabat",
@@ -42,22 +41,23 @@
       "agadir",
       "fes"
     ],
-    "isFeatured": true,
-    "pricePerGram": 8,
-    "description": "— Un profil fruité et gourmand mêlant des notes de pêche douce, raisin mûr et une touche de citron frais. Un mélange sucré, tropical et légèrement acidulé, avec une belle fraîcheur en bouche.",
-    "additionalPhotos": [],
-    "price": 8,
-    "badge": "IN_STOCK",
-    "imageUrl": "",
-    "category": "STATIC",
     "city": "casablanca",
-    "duration": "0:15",
+    "title": "ALIEN CHERRY LEMON🍇🍒🍋",
     "currency": "EUR",
     "videoUrl": "https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0292552802.firebasestorage.app/o/uploads%2F899b5f2e-80eb-4e2c-9653-1bc80bb03cf2.MP4_secure_compat.mp4?alt=media&token=fd809aec-daca-48a7-a748-9a298b96adc3",
     "views": 1252,
-    "title": "ALIEN CHERRY LEMON🍇🍒🍋",
+    "description": "— Un profil fruité et gourmand mêlant des notes de pêche douce, raisin mûr et une touche de citron frais. Un mélange sucré, tropical et légèrement acidulé, avec une belle fraîcheur en bouche.",
+    "category": "STATIC",
+    "additionalPhotos": [],
+    "imageUrl": "",
+    "pricePerGram": 8,
+    "isFeatured": true,
     "author": "THE HASHMAN SHOP",
+    "isPremium": true,
+    "id": "omerta-custom-1787518977330",
+    "duration": "0:15",
     "thumbnailUrl": "https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0292552802.firebasestorage.app/o/uploads%2Ff05a58c4-9485-403a-bc28-ebc611ad726f.jpg?alt=media&token=abbf1869-f11e-4943-837f-9c6d85dda12e",
-    "id": "omerta-custom-1787518977330"
+    "badge": "IN_STOCK",
+    "price": 8
   }
 ]

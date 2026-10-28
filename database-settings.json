@@ -1,101 +1,101 @@
 {
-  "logoUrl": "https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0292552802.firebasestorage.app/o/uploads%2Fc7dbae8a-2216-41e8-b3f0-c74a0e015ca6.jpg?alt=media&token=ffd8e9b4-9d68-4591-94fb-b2493a5e5dc1",
+  "introVideoUrl": "",
+  "introBgUrl": "https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0292552802.firebasestorage.app/o/uploads%2Fa430f95b-c306-4c01-8809-1c1254d7071b.png?alt=media&token=5b684057-12d6-4f2b-9be3-c4786fe66896",
+  "customAppUrl": "https://the-hasman.vercel.app",
+  "telegramChannelUrl": "https://t.me/yoru47",
+  "telegramSupportUrl": "https://t.me/yoru47",
+  "signalUrl": "https://signal.me/#eu/w6NQMTq58RhypsehbArfwBE8e6-MEK-eVR00xyjQk5HJmVv06d9BVLnw6fW-poXa",
+  "promoImageUrl": "/the_hashman_shop_welcome.jpg",
+  "bgLogoUrl": "https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0292552802.firebasestorage.app/o/uploads%2Fd0fdd2e7-9d62-46fa-8d52-585f7875eb8b.png?alt=media&token=a813f929-4828-4e5a-99bf-4bf66b12499a",
+  "launchScreenUrl": "https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0292552802.firebasestorage.app/o/uploads%2F723e6517-7f86-489d-8502-d7697181a6a5.png?alt=media&token=00407418-31e0-4623-bd6f-b8e01148fa69",
+  "instagramUrl": "",
   "sectionTitles": [
     {
-      "id": "1",
       "text": "THE HASHMAN SHOP",
+      "category": "All",
+      "color": "#8B5CF6",
+      "enabled": true,
       "size": "L",
       "order": 1,
-      "enabled": true,
-      "category": "All",
-      "color": "#8B5CF6"
+      "id": "1"
     },
     {
-      "id": "2",
-      "color": "#8B5CF6",
-      "category": "LA MOUSSE",
-      "size": "L",
       "text": "SELECTION LA MOUSSE",
+      "color": "#8B5CF6",
+      "size": "L",
+      "enabled": true,
       "order": 2,
-      "enabled": true
+      "category": "LA MOUSSE",
+      "id": "2"
     },
     {
+      "size": "L",
+      "order": 3,
       "color": "#8B5CF6",
       "id": "3",
       "enabled": true,
-      "category": "DRY SIFT",
-      "order": 3,
-      "size": "L",
-      "text": "SELECTION DRY SIFT"
+      "text": "SELECTION DRY SIFT",
+      "category": "DRY SIFT"
     },
     {
+      "id": "4",
+      "color": "#8B5CF6",
+      "category": "BELDIA",
+      "size": "L",
       "enabled": true,
       "order": 4,
-      "text": "SELECTION BELDIA",
-      "size": "L",
-      "id": "4",
-      "category": "BELDIA",
-      "color": "#8B5CF6"
+      "text": "SELECTION BELDIA"
     },
     {
-      "order": 5,
+      "category": "FROZEN",
       "id": "5",
-      "size": "L",
-      "text": "SELECTION FROZEN",
       "enabled": true,
+      "order": 5,
+      "size": "L",
       "color": "#8B5CF6",
-      "category": "FROZEN"
+      "text": "SELECTION FROZEN"
     },
     {
-      "id": "6",
       "order": 6,
-      "color": "#8B5CF6",
+      "id": "6",
+      "text": "SELECTION STATIC",
       "enabled": true,
       "category": "STATIC",
-      "size": "L",
-      "text": "SELECTION STATIC"
+      "color": "#8B5CF6",
+      "size": "L"
     },
     {
-      "order": 7,
-      "enabled": true,
       "text": "SELECTION WPFF",
-      "size": "L",
-      "category": "WPFF",
       "id": "7",
-      "color": "#8B5CF6"
+      "enabled": true,
+      "category": "WPFF",
+      "color": "#8B5CF6",
+      "order": 7,
+      "size": "L"
     },
     {
-      "id": "8",
-      "color": "#8B5CF6",
-      "size": "L",
       "text": "MEET UP RABAT",
-      "order": 8,
+      "category": "MEET UP RABAT",
+      "color": "#8B5CF6",
+      "size": "L",
       "enabled": true,
-      "category": "MEET UP RABAT"
+      "order": 8,
+      "id": "8"
     },
     {
-      "category": "ACCESSOIRES",
-      "enabled": true,
-      "color": "#8B5CF6",
-      "id": "9",
       "size": "L",
+      "color": "#8B5CF6",
+      "category": "ACCESSOIRES",
       "text": "ACCESSOIRES",
-      "order": 9
+      "id": "9",
+      "order": 9,
+      "enabled": true
     }
   ],
-  "homepageHeroBgUrl": "https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0292552802.firebasestorage.app/o/uploads%2F2fc879a6-5e65-4dd5-ae81-1df5299211b7.png?alt=media&token=8cc973af-a2ee-4624-860d-edc7dd40b028",
-  "introVideoUrl": "",
-  "signalUrl": "https://signal.me/#eu/w6NQMTq58RhypsehbArfwBE8e6-MEK-eVR00xyjQk5HJmVv06d9BVLnw6fW-poXa",
-  "promoImageUrl": "/the_hashman_shop_welcome.jpg",
-  "telegramChannelUrl": "https://t.me/yoru47",
-  "promoMessageText": "🚨 NEW DROP EST DISPONIBLE 🚨\n\nLes nouvelles références sont arrivées. 👀🔥\n\n📲 La mini-application est opérationnelle pour passer vos commandes.\nAppuyez sur 🛒 Shop pour y accéder directement.\n\n⚠️ Si vous n’avez pas encore accès, envoyez votre ID en privé afin d’être ajouté à la liste d’accès.\n@yoru47\n\nBonne découverte à tous. 💨",
+  "logoUrl": "https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0292552802.firebasestorage.app/o/uploads%2Fc7dbae8a-2216-41e8-b3f0-c74a0e015ca6.jpg?alt=media&token=ffd8e9b4-9d68-4591-94fb-b2493a5e5dc1",
   "appDisabled": false,
-  "telegramSupportUrl": "https://t.me/yoru47",
-  "customAppUrl": "https://the-hasman.vercel.app",
   "introStatusLine": "THE HASHMAN SHOP — BOUTIQUE OFFICIELLE",
-  "bgLogoUrl": "https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0292552802.firebasestorage.app/o/uploads%2Fd0fdd2e7-9d62-46fa-8d52-585f7875eb8b.png?alt=media&token=a813f929-4828-4e5a-99bf-4bf66b12499a",
-  "introBgUrl": "https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0292552802.firebasestorage.app/o/uploads%2Fa430f95b-c306-4c01-8809-1c1254d7071b.png?alt=media&token=5b684057-12d6-4f2b-9be3-c4786fe66896",
+  "promoMessageText": "🚨 NEW DROP EST DISPONIBLE 🚨\n\nLes nouvelles références sont arrivées. 👀🔥\n\n📲 La mini-application est opérationnelle pour passer vos commandes.\nAppuyez sur 🛒 Shop pour y accéder directement.\n\n⚠️ Si vous n’avez pas encore accès, envoyez votre ID en privé afin d’être ajouté à la liste d’accès.\n@yoru47\n\nBonne découverte à tous. 💨",
   "promoButtonText": "Boutique 🛍️",
-  "instagramUrl": "",
-  "launchScreenUrl": "https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0292552802.firebasestorage.app/o/uploads%2F723e6517-7f86-489d-8502-d7697181a6a5.png?alt=media&token=00407418-31e0-4623-bd6f-b8e01148fa69"
+  "homepageHeroBgUrl": "https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0292552802.firebasestorage.app/o/uploads%2F2fc879a6-5e65-4dd5-ae81-1df5299211b7.png?alt=media&token=8cc973af-a2ee-4624-860d-edc7dd40b028"
 }
