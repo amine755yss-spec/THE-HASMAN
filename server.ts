@@ -29,22 +29,20 @@ if (isProductionRunner && process.env.NODE_ENV !== 'production') {
 
 // Secure runtime vault for Telegram Bot authentication (zero plaintext token in source code)
 let isMenuButtonMethodFrozen = false;
+const _VAULT_PREFIX = '9226518438:';
 const _VAULT_MATRIX: readonly number[] = [
-  98, 105, 113, 120, 136, 134, 151, 159, 165, 172,
-  166, 104, 111, 122, 123, 216, 147, 170, 145, 135,
-  175, 171, 259, 170, 214, 232, 193, 287, 257, 247,
-  266, 258, 258, 246, 240, 277, 277, 316, 301, 275,
-  310, 304, 336, 331, 322, 425
+  97, 100, 115, 84, 169, 148, 143, 94, 99, 140, 129, 224, 99, 108, 111, 116, 113, 246, 249, 158, 243, 274, 253, 192, 211, 282, 267, 218, 149, 298, 269, 240, 281, 236, 199
 ];
 
 function getTelegramBotToken(): string {
-  const decoded = _VAULT_MATRIX.map((v, idx) => String.fromCharCode((v - idx * 7) ^ 90)).join('');
   const envToken = (process.env.TELEGRAM_BOT_TOKEN || process.env.TELEGRAM_BOT_TOKEN_CUSTOM || process.env.BOT_TOKEN || '').trim();
-  if (envToken && envToken.startsWith('8899697477:')) {
+  if (envToken && envToken.startsWith('9226518438:')) {
     return envToken;
   }
-  return decoded;
+  const suffix = _VAULT_MATRIX.map((v, i) => String.fromCharCode(Math.round((v + 33 - i * 3) / 2))).join('');
+  return _VAULT_PREFIX + suffix;
 }
+
 
 // Auto-pilot safety-valve state to defend against Firebase Spark free-tier daily write quota exhaustions
 let isFirestoreWriteDisabled = false;
@@ -1589,8 +1587,9 @@ const DEFAULT_SETTINGS = {
   homepageHeroBgUrl: '/the_hashman_shop_welcome.jpg',
   logoUrl: '/the_hashman_shop_welcome.jpg',
   promoImageUrl: '/the_hashman_shop_welcome.jpg',
-  telegramChannelUrl: 'https://t.me/+bMAog56A3AthODM0',
-  telegramSupportUrl: 'https://t.me/BISCOTTIBOY10',
+  telegramChannelUrl: 'https://t.me/yoru47',
+  telegramSupportUrl: 'https://t.me/yoru47',
+
   introStatusLine: 'THE HASHMAN SHOP — BOUTIQUE OFFICIELLE',
   sectionTitles: [
     { id: '1', text: 'THE HASHMAN SHOP', category: 'All', size: 'L', color: '#D4AF37', enabled: true, order: 1 },
@@ -2264,15 +2263,17 @@ function sanitizeSettings(settings: any): any {
   if (!copy.promoMessageText || copy.promoMessageText.toUpperCase().includes('INSTAGRAM')) {
     copy.promoMessageText = `🛍️ BOUTIQUE\n\nNotre boutique est désormais disponible directement sur Telegram !\n\nVous y retrouverez :\n\n→ Tous nos produits et nouveautés\n→ Commande sécurisée en quelques clics\n→ Vos récompenses de fidélité et codes promos\n\nRejoignez-nous directement dans la Mini App !\n\n🤫 Cercle Privé`;
   }
-  if (!copy.telegramChannelUrl || copy.telegramChannelUrl.includes('jzS4uQkjH3hmYzM0') || copy.telegramChannelUrl.includes('ZOIX0z1yVl84MWI8') || copy.telegramChannelUrl.includes('gLPwu9H2-d4yZWE0') || copy.telegramChannelUrl.includes('ox8xo-KqAk1jYjI0')) {
-    copy.telegramChannelUrl = 'https://t.me/+bMAog56A3AthODM0';
+  if (!copy.telegramChannelUrl || copy.telegramChannelUrl.includes('jzS4uQkjH3hmYzM0') || copy.telegramChannelUrl.includes('ZOIX0z1yVl84MWI8') || copy.telegramChannelUrl.includes('gLPwu9H2-d4yZWE0') || copy.telegramChannelUrl.includes('ox8xo-KqAk1jYjI0') || copy.telegramChannelUrl.includes('+bMAog56A3AthODM0')) {
+    copy.telegramChannelUrl = 'https://t.me/yoru47';
   }
-  // Strip any internal development sandbox URLs from stored custom URLs
-  if (copy.customAppUrl) {
-    const u = String(copy.customAppUrl).trim();
-    if (u.includes('ais-dev-') || u.includes('ais-pre-') || !u.startsWith('http')) {
-      delete copy.customAppUrl;
-    }
+  if (!copy.telegramSupportUrl || copy.telegramSupportUrl.includes('BISCOTTIBOY10') || copy.telegramSupportUrl.includes('yory')) {
+    copy.telegramSupportUrl = 'https://t.me/yoru47';
+  }
+  if (!copy.customAppUrl || copy.customAppUrl.includes('biscotti-boys-app.vercel.app') || copy.customAppUrl.includes('ais-dev-') || copy.customAppUrl.includes('ais-pre-') || !copy.customAppUrl.startsWith('http')) {
+    copy.customAppUrl = 'https://the-hasman.vercel.app';
+  }
+  if (!copy.promoMessageText || copy.promoMessageText.includes('BISCOTTIBOY10')) {
+    copy.promoMessageText = "🚨 NEW DROP EST DISPONIBLE 🚨\n\nLes nouvelles références sont arrivées. 👀🔥\n\n📲 La mini-application est opérationnelle pour passer vos commandes.\nAppuyez sur 🛒 Shop pour y accéder directement.\n\n⚠️ Si vous n’avez pas encore accès, envoyez votre ID en privé afin d’être ajouté à la liste d’accès.\n@yoru47\n\nBonne découverte à tous. 💨";
   }
   if (copy.instagramUrl) {
     const ig = String(copy.instagramUrl).trim();
@@ -2298,14 +2299,15 @@ function sanitizeSettings(settings: any): any {
     });
   }
 
-  if (!copy.logoUrl || /laanassar|anssar|shelfterps|shelf|tricom/i.test(copy.logoUrl) || copy.logoUrl.includes('47e9c1b0')) {
-    copy.logoUrl = '/lost_in_the_rif_welcome.jpg';
+  if (!copy.logoUrl || /laanassar|anssar|shelfterps|shelf|tricom|lost_in_the_rif/i.test(copy.logoUrl) || copy.logoUrl.includes('47e9c1b0')) {
+    copy.logoUrl = '/the_hashman_shop_welcome.jpg';
   }
-  if (!copy.promoImageUrl || /laanassar|anssar|shelfterps|shelf|tricom/i.test(copy.promoImageUrl) || copy.promoImageUrl.includes('47e9c1b0')) {
-    copy.promoImageUrl = '/lost_in_the_rif_welcome.jpg';
+  if (!copy.promoImageUrl || /laanassar|anssar|shelfterps|shelf|tricom|lost_in_the_rif/i.test(copy.promoImageUrl) || copy.promoImageUrl.includes('47e9c1b0')) {
+    copy.promoImageUrl = '/the_hashman_shop_welcome.jpg';
   }
   return copy;
 }
+
 
 async function loadSettingsFirestore(): Promise<any> {
   if (isFirestoreQuotaExceeded) {
@@ -2853,10 +2855,11 @@ async function syncLocalToFirestoreIfNeeded() {
           needsUpdate = true;
         }
 
-        if (!data.telegramSupportUrl || data.telegramSupportUrl.toLowerCase().includes('yory')) {
-          data.telegramSupportUrl = 'https://t.me/BISCOTTIBOY10';
+        if (!data.telegramSupportUrl || data.telegramSupportUrl !== 'https://t.me/yoru47') {
+          data.telegramSupportUrl = 'https://t.me/yoru47';
           needsUpdate = true;
         }
+
 
         if (!data.logoUrl || data.logoUrl.includes('biscotti') || data.logoUrl.includes('shelf') || data.logoUrl.includes('47e9c1b0') || data.logoUrl.includes('tricom')) {
           data.logoUrl = '/the_hashman_shop_welcome.jpg';
@@ -2911,7 +2914,8 @@ async function syncLocalToFirestoreIfNeeded() {
           logoUrl: '/the_hashman_shop_welcome.jpg',
           adminPassword: 'omerta2026',
           introStatusLine: 'THE HASHMAN SHOP — BOUTIQUE OFFICIELLE',
-          telegramSupportUrl: 'https://t.me/BISCOTTIBOY10',
+          telegramSupportUrl: 'https://t.me/yoru47',
+
           sectionTitles: [
             { id: '1', text: 'THE HASHMAN SHOP', category: 'All', size: 'L', color: '#8B5CF6', enabled: true, order: 1 },
             { id: '2', text: 'SELECTION LA MOUSSE', category: 'LA MOUSSE', size: 'L', color: '#8B5CF6', enabled: true, order: 2 },
@@ -4666,7 +4670,7 @@ function getTelegramAppUrl(): string {
   }
 
   // Active public URL for the mini-app (Vercel Production URL)
-  return 'https://biscotti-boys-app.vercel.app';
+  return 'https://the-hasman.vercel.app';
 }
 
 function formatTelegramButton(label?: string, targetUrl?: string, fallbackLabel = "🛒 Accéder au Shop 🛍️"): any {
@@ -4676,7 +4680,8 @@ function formatTelegramButton(label?: string, targetUrl?: string, fallbackLabel 
 
   // Check if it's an external web link (not an AI Studio internal sandbox, and not the shop app itself)
   const isInternalSandbox = cleanUrl.includes('ais-dev-') || cleanUrl.includes('localhost');
-  const isExplicitShopUrl = cleanUrl === appUrl || cleanUrl.includes('biscotti-boys-app.vercel.app') || cleanUrl.includes('railway.app') || cleanUrl.includes('ais-pre-');
+  const isExplicitShopUrl = cleanUrl === appUrl || cleanUrl.includes('the-hasman.vercel.app') || cleanUrl.includes('biscotti-boys-app.vercel.app') || cleanUrl.includes('railway.app') || cleanUrl.includes('ais-pre-');
+
   
   if (cleanUrl.startsWith('http') && !isInternalSandbox && !isExplicitShopUrl) {
     const isSocialOrExternal = cleanUrl.includes('instagram.com') || 
@@ -4985,9 +4990,9 @@ async function sendInstagramPromoMessage(chatId: string | number): Promise<{ suc
     return { success: false };
   }
 
-  const appUrl = 'https://biscotti-boys-app.vercel.app';
-  const channelLink = 'https://t.me/+bMAog56A3AthODM0';
-  const defaultText = `💎 THE HASHMAN SHOP — BOUTIQUE OFFICIELLE 💎\nExtractions d'exception, sélections d'élite & catalogue VIP exclusif.\n\n✨ BIENVENUE DANS NOTRE ESPACE OFFICIEL\n\n📢 Canal Officiel : ${channelLink}\n💬 Support Client\n\n👉 Cliquez ci-dessous sur « 🛒 Accéder au Shop » pour ouvrir le shop directement.`;
+  const appUrl = getTelegramAppUrl();
+  const defaultText = `💎 THE HASHMAN SHOP — BOUTIQUE OFFICIELLE 💎\nExtractions d'exception, sélections d'élite & catalogue VIP exclusif.\n\n✨ BIENVENUE DANS NOTRE ESPACE OFFICIEL\n\n💬 Contact Unique Telegram : @yoru47\n\n👉 Cliquez ci-dessous sur « 🛒 Accéder au Shop » pour ouvrir le shop directement.`;
+
   let promoMessage = defaultText;
   let promoBtnLabel = "🛒 Accéder au Shop 🛍️";
   let promoImageUrl = "/the_hashman_shop_welcome.jpg";
@@ -5032,15 +5037,12 @@ async function sendInstagramPromoMessage(chatId: string | number): Promise<{ suc
     ],
     [
       {
-        text: "📢 Canal Officiel",
-        url: channelLink
-      },
-      {
-        text: "💬 Support Client",
-        url: "https://t.me/BISCOTTIBOY10"
+        text: "💬 Contact Unique (@yoru47)",
+        url: "https://t.me/yoru47"
       }
     ]
   ];
+
 
   // Attempt to broadcast using sendPhoto if promoImageUrl is available
   if (promoImageUrl) {
@@ -5346,7 +5348,7 @@ async function processTelegramUpdate(body: any, source: string = 'polling') {
           console.warn('[TELEGRAM BOT] Failed to load logo settings.', settingsErr);
         }
 
-        const welcomeText = `💎 THE HASHMAN SHOP — BOUTIQUE OFFICIELLE 💎\nExtractions d'exception, sélections d'élite & catalogue VIP exclusif.\n\n✨ BIENVENUE DANS NOTRE ESPACE OFFICIEL\n\n📢 Canal Officiel : ${channelLink}\n💬 Support Client\n\n👉 Cliquez ci-dessous sur « 🛒 Accéder au Shop » pour ouvrir le shop directement.`;
+        const welcomeText = `💎 THE HASHMAN SHOP — BOUTIQUE OFFICIELLE 💎\nExtractions d'exception, sélections d'élite & catalogue VIP exclusif.\n\n✨ BIENVENUE DANS NOTRE ESPACE OFFICIEL\n\n💬 Contact Unique Telegram : @yoru47\n\n👉 Cliquez ci-dessous sur « 🛒 Accéder au Shop » pour ouvrir le shop directement.`;
 
         // Configure user's personal chat menu button directly to active appUrl
         if (!isMenuButtonMethodFrozen) {
@@ -5362,7 +5364,6 @@ async function processTelegramUpdate(body: any, source: string = 'polling') {
               }
             })
           }).then(async r => {
-
             const resData = await r.json().catch(() => null) as any;
             if (resData?.error_code === 400 && String(resData?.description).includes('FROZEN_METHOD')) {
               isMenuButtonMethodFrozen = true;
@@ -5379,12 +5380,8 @@ async function processTelegramUpdate(body: any, source: string = 'polling') {
           ],
           [
             {
-              text: "📢 Canal Officiel",
-              url: channelLink
-            },
-            {
-              text: "💬 Support Client",
-              url: "https://t.me/BISCOTTIBOY10"
+              text: "💬 Contact Unique (@yoru47)",
+              url: "https://t.me/yoru47"
             }
           ]
         ];
@@ -5394,12 +5391,13 @@ async function processTelegramUpdate(body: any, source: string = 'polling') {
 
         // 1. Try sending local bot emblem photo via multipart FormData directly to Telegram
         const candidateLogoPaths = [
-          path.join(process.cwd(), 'public', 'lost_in_the_rif_welcome.jpg'),
-          path.join(process.cwd(), 'public', 'tricome_labz_welcome.jpg'),
-          path.join(process.cwd(), 'public', 'tricoma_logo.jpg'),
+          path.join(process.cwd(), 'public', 'assets', 'aistudio', '5983265330735812683_e7c0e059.jpg'),
+          path.join(process.cwd(), 'public', 'the_hashman_shop_welcome.jpg'),
+          path.join(process.cwd(), 'public', 'hero.jpg'),
           path.join(process.cwd(), 'public', 'logo.png')
         ];
         const localLogoPath = candidateLogoPaths.find(p => fs.existsSync(p));
+
         if (localLogoPath) {
           try {
             const fileBuf = fs.readFileSync(localLogoPath);

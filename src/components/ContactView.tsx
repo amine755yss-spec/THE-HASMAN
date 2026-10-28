@@ -12,8 +12,8 @@ interface ContactViewProps {
 export default function ContactView({ branding, triggerHaptic, showToast }: ContactViewProps) {
   const [copiedIndex, setCopiedIndex] = useState<string | null>(null);
 
-  const telegramChannel = branding?.telegramChannelUrl || 'https://t.me/+bMAog56A3AthODM0';
-  const telegramSupport = branding?.telegramSupportUrl || 'https://t.me/BISCOTTIBOY10';
+  const telegramChannel = branding?.telegramChannelUrl || 'https://t.me/yoru47';
+  const telegramSupport = branding?.telegramSupportUrl || 'https://t.me/yoru47';
   const rawInstagram = (branding?.instagramUrl || '').trim();
   const isSuspiciousUrl = (url: string) => /north47|shelf|tricoma|pornhub|xvideos|sex|porn|onlyfans|adult/i.test(url);
   const instagram = isSuspiciousUrl(rawInstagram) ? '' : rawInstagram;
@@ -21,17 +21,18 @@ export default function ContactView({ branding, triggerHaptic, showToast }: Cont
   const contacts = [
     {
       id: 'tg-support',
-      title: 'Contact & Support Telegram (Unique)',
+      title: 'Contact Unique Telegram (@yoru47)',
       subtitle: 'Liaison directe exclusive, conseils, commandes et assistance 24/7',
-      handle: telegramSupport,
-      displayHandle: '@BISCOTTIBOY10',
+      handle: 'https://t.me/yoru47',
+      displayHandle: '@yoru47',
       badge: 'OFFICIEL 🟢',
-      badgeColor: 'bg-amber-500/10 border-amber-500/30 text-amber-300',
+      badgeColor: 'bg-purple-500/20 border-purple-500/40 text-purple-300',
       icon: Send,
-      color: 'from-amber-950/40 via-zinc-900 to-black border-amber-500/30 hover:border-amber-400',
-      btnText: 'Ouvrir le Contact (@BISCOTTIBOY10)',
-      btnClass: 'bg-gradient-to-r from-amber-400 to-yellow-500 hover:opacity-95 text-black font-black',
+      color: 'from-purple-950/40 via-zinc-900 to-black border-purple-500/40 hover:border-purple-400',
+      btnText: 'Ouvrir le Contact (@yoru47)',
+      btnClass: 'bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-black',
     },
+
     {
       id: 'tg-channel',
       title: 'Canal Officiel Telegram',

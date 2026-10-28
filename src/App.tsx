@@ -670,18 +670,9 @@ export default function App() {
       <header className="sticky top-0 z-40 bg-[#0A0514]/85 backdrop-blur-2xl border-b border-purple-900/30 px-3 py-2 md:px-6 select-none shadow-xl">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
           
-          {/* Left: Hamburger Menu Button ☰ */}
+          {/* Brand Logo & Title on the left */}
           <div className="flex items-center gap-2">
-            <button
-              onClick={() => {
-                triggerHaptic('medium');
-                setIsSideMenuOpen(true);
-              }}
-              className="p-2 rounded-2xl bg-white/5 border border-purple-900/40 text-neutral-200 hover:text-purple-400 hover:bg-white/10 transition cursor-pointer active:scale-90"
-              title="Menu"
-            >
-              <Menu className="w-5 h-5" />
-            </button>
+
 
             {/* Logo / Brand Title (5 secret taps unlock discreet admin prompt) */}
             <div 

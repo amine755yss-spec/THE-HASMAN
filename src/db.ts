@@ -574,7 +574,7 @@ export async function getBrandingSettings(): Promise<BrandingSettings> {
   ];
 
   const defaultSettings: BrandingSettings = {
-    promoMessageText: "🚨 NEW DROP EST DISPONIBLE 🚨\n\nLes nouvelles références sont arrivées. 👀🔥\n\n📲 La mini-application est opérationnelle pour passer vos commandes.\nAppuyez sur 🛒 Shop pour y accéder directement.\n\n⚠️ Si vous n’avez pas encore accès, envoyez votre ID en privé afin d’être ajouté à la liste d’accès.\n@BISCOTTIBOY10\n\nBonne découverte à tous. 💨",
+    promoMessageText: "🚨 NEW DROP EST DISPONIBLE 🚨\n\nLes nouvelles références sont arrivées. 👀🔥\n\n📲 La mini-application est opérationnelle pour passer vos commandes.\nAppuyez sur 🛒 Shop pour y accéder directement.\n\n⚠️ Si vous n’avez pas encore accès, envoyez votre ID en privé afin d’être ajouté à la liste d’accès.\n@yoru47\n\nBonne découverte à tous. 💨",
     promoButtonText: 'Boutique 🛍️',
     introBgUrl: '/the_hashman_shop_welcome.jpg',
     launchScreenUrl: '/the_hashman_shop_welcome.jpg',
@@ -583,12 +583,14 @@ export async function getBrandingSettings(): Promise<BrandingSettings> {
     logoUrl: '/the_hashman_shop_welcome.jpg',
     promoImageUrl: '/the_hashman_shop_welcome.jpg',
     introStatusLine: 'THE HASHMAN SHOP — BOUTIQUE OFFICIELLE',
-    telegramChannelUrl: 'https://t.me/+bMAog56A3AthODM0',
-    telegramSupportUrl: 'https://t.me/BISCOTTIBOY10',
+    telegramChannelUrl: 'https://t.me/yoru47',
+    telegramSupportUrl: 'https://t.me/yoru47',
     signalUrl: 'https://signal.me/#eu/w6NQMTq58RhypsehbArfwBE8e6-MEK-eVR00xyjQk5HJmVv06d9BVLnw6fW-poXa',
-    customAppUrl: 'https://biscotti-boys-app.vercel.app',
+    customAppUrl: 'https://the-hasman.vercel.app',
     sectionTitles: defaultTitles
   };
+
+
 
   try {
     const res = await fetch(`/api/settings?t=${Date.now()}`, {

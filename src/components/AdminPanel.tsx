@@ -3034,7 +3034,8 @@ export default function AdminPanel({
                         type="text"
                         value={settings.telegramSupportUrl || ''}
                         onChange={(e) => setBrandingSettings({ ...settings, telegramSupportUrl: e.target.value })}
-                        placeholder="Ex: https://t.me/Samy_ghost"
+                        placeholder="Ex: https://t.me/yoru47"
+
                         className="w-full text-[9px] py-1.5 px-2.5 rounded bg-black border border-[#222] focus:border-[#D4AF37] text-white outline-none font-mono"
                       />
                     </div>
@@ -3243,9 +3244,10 @@ export default function AdminPanel({
                       type="text"
                       value={settings.customAppUrl || ''}
                       onChange={(e) => setBrandingSettings({ ...settings, customAppUrl: e.target.value })}
-                      placeholder="https://...vercel.app (par défaut)"
+                      placeholder="https://the-hasman.vercel.app (par défaut)"
                       className="w-full text-[9px] py-1.5 px-2.5 rounded bg-black border border-[#222] focus:border-[#D4AF37] text-white outline-none font-mono"
                     />
+
                   </div>
                   <div className="space-y-1">
                     <label className="text-gray-400 block font-bold mb-1">🔗 URL DE DESTINATION (BOUTON 2 - OPTIONNEL) :</label>

@@ -46,8 +46,9 @@ interface CategoryTab {
   emoji?: string;
 }
 
-const DEFAULT_HERO_VISUAL = '/bot_welcome_tricoma_1787942931044.jpg';
-const FALLBACK_LOGO = '/tricoma_logo.png';
+const DEFAULT_HERO_VISUAL = '/the_hashman_shop_welcome.jpg';
+const FALLBACK_LOGO = '/logo.png';
+
 
 export default function HomeView({
   branding,

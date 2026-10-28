@@ -77,14 +77,16 @@ export const InteractiveMapView: React.FC<InteractiveMapViewProps> = ({
       attributionControl: false
     });
 
-    // Dark luxury CartoDB Dark Matter tiles
+    // Dark luxury CartoDB Dark Matter tiles (OpenStreetMap/CartoDB 100% free - zero API key required)
     L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
       subdomains: 'abcd',
-      maxZoom: 19
+      maxZoom: 19,
+      errorTileUrl: 'https://tile.openstreetmap.org/6/32/25.png'
     }).addTo(map);
 
     // Zoom control in top right
     L.control.zoom({ position: 'topright' }).addTo(map);
+
 
     mapInstanceRef.current = map;
 
@@ -278,11 +280,11 @@ export const InteractiveMapView: React.FC<InteractiveMapViewProps> = ({
             <h2 className="text-lg font-black text-white tracking-wide uppercase flex items-center gap-2">
               Réseau & Emplacements
               <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30">
-                Direct Maroc
+                100% Maroc
               </span>
             </h2>
             <p className="text-xs text-purple-300/70">
-              {cities.length} Hubs officiels THE HASHMAN SHOP actifs
+              {cities.length} Villes & Hubs officiels couverts (Gratuit • Sans clé API)
             </p>
           </div>
         </div>
@@ -329,9 +331,10 @@ export const InteractiveMapView: React.FC<InteractiveMapViewProps> = ({
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Rechercher une ville (Casablanca, Rabat, Marrakech, Tanger...)"
+          placeholder="Rechercher une ville du Maroc (Casablanca, Rabat, Marrakech, Tanger, Fès, Dakhla...)"
           className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#0D071B] border border-purple-900/50 text-white placeholder-purple-400/40 text-xs focus:outline-none focus:border-purple-500 transition-colors shadow-inner"
         />
+
         {searchQuery && (
           <button 
             onClick={() => setSearchQuery('')}

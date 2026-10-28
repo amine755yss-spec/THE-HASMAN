@@ -9,7 +9,30 @@ export type SupportedCity =
   | 'marrakech'
   | 'tanger'
   | 'agadir'
-  | 'fes';
+  | 'fes'
+  | 'meknes'
+  | 'oujda'
+  | 'kenitra'
+  | 'tetouan'
+  | 'safi'
+  | 'mohammedia'
+  | 'eljadida'
+  | 'benimellal'
+  | 'nador'
+  | 'taza'
+  | 'khouribga'
+  | 'settat'
+  | 'berrechid'
+  | 'essaouira'
+  | 'alhoceima'
+  | 'chefchaouen'
+  | 'dakhla'
+  | 'laayoune'
+  | 'taroudant'
+  | 'berkane'
+  | 'ouarzazate'
+  | 'larache'
+  | 'guelmim';
 
 export interface CityOption {
   id: SupportedCity;
@@ -98,7 +121,284 @@ export const SUPPORTED_CITIES: CityOption[] = [
     hubName: 'Hub Ville Nouvelle',
     address: 'Point de retrait & livraison VIP Fès'
   },
+  {
+    id: 'meknes',
+    name: 'Meknès',
+    country: 'Maroc',
+    flag: '🇲🇦',
+    subtitle: 'Cité Ismaélienne Premium',
+    lat: 33.8938,
+    lng: -5.5516,
+    deliveryTime: 'Expédition Sécurisée 24/48h',
+    hubName: 'Hub Hamria',
+    address: 'Point de retrait & livraison VIP Meknès'
+  },
+  {
+    id: 'kenitra',
+    name: 'Kénitra',
+    country: 'Maroc',
+    flag: '🇲🇦',
+    subtitle: 'Gharb Coast VIP Reserve',
+    lat: 34.2610,
+    lng: -6.5802,
+    deliveryTime: 'Livraison Express 24h',
+    hubName: 'Hub Centre / Mehdia',
+    address: 'Point de retrait & livraison VIP Kénitra'
+  },
+  {
+    id: 'tetouan',
+    name: 'Tétouan',
+    country: 'Maroc',
+    flag: '🇲🇦',
+    subtitle: 'Colombe Blanche Selection',
+    lat: 35.5889,
+    lng: -5.3626,
+    deliveryTime: 'Livraison Express 24/48h',
+    hubName: 'Hub Ensanche / Martil',
+    address: 'Point de retrait & livraison VIP Tétouan'
+  },
+  {
+    id: 'oujda',
+    name: 'Oujda',
+    country: 'Maroc',
+    flag: '🇲🇦',
+    subtitle: 'Oriental VIP Reserve',
+    lat: 34.6867,
+    lng: -1.9114,
+    deliveryTime: 'Expédition Sécurisée 48h',
+    hubName: 'Hub Lazaret / Centre',
+    address: 'Point de retrait & livraison VIP Oujda'
+  },
+  {
+    id: 'nador',
+    name: 'Nador',
+    country: 'Maroc',
+    flag: '🇲🇦',
+    subtitle: 'Rif Coast Private Club',
+    lat: 35.1681,
+    lng: -2.9335,
+    deliveryTime: 'Expédition Sécurisée 24/48h',
+    hubName: 'Hub Marchica',
+    address: 'Point de retrait & livraison VIP Nador'
+  },
+  {
+    id: 'mohammedia',
+    name: 'Mohammédia',
+    country: 'Maroc',
+    flag: '🇲🇦',
+    subtitle: 'Cité des Fleurs VIP Reserve',
+    lat: 33.6866,
+    lng: -7.3829,
+    deliveryTime: 'Livraison Express 24h & Meet-up',
+    hubName: 'Hub Miramar / Kasbah',
+    address: 'Point de retrait & livraison VIP Mohammédia'
+  },
+  {
+    id: 'eljadida',
+    name: 'El Jadida',
+    country: 'Maroc',
+    flag: '🇲🇦',
+    subtitle: 'Mazagan Elite Selection',
+    lat: 33.2316,
+    lng: -8.5007,
+    deliveryTime: 'Expédition Sécurisée 24/48h',
+    hubName: 'Hub Mazagan / Sidi Bouzid',
+    address: 'Point de retrait & livraison VIP El Jadida'
+  },
+  {
+    id: 'safi',
+    name: 'Safi',
+    country: 'Maroc',
+    flag: '🇲🇦',
+    subtitle: 'Atlantique VIP Selection',
+    lat: 32.2994,
+    lng: -9.2372,
+    deliveryTime: 'Expédition Sécurisée 48h',
+    hubName: 'Hub Plateau / Sidi Bouzid',
+    address: 'Point de retrait & livraison VIP Safi'
+  },
+  {
+    id: 'benimellal',
+    name: 'Béni Mellal',
+    country: 'Maroc',
+    flag: '🇲🇦',
+    subtitle: 'Tadla Atlas Reserve',
+    lat: 32.3394,
+    lng: -6.3608,
+    deliveryTime: 'Expédition Sécurisée 48h',
+    hubName: 'Hub Ain Asserdoun',
+    address: 'Point de retrait & livraison VIP Béni Mellal'
+  },
+  {
+    id: 'essaouira',
+    name: 'Essaouira',
+    country: 'Maroc',
+    flag: '🇲🇦',
+    subtitle: 'Mogador Bohemian VIP',
+    lat: 31.5085,
+    lng: -9.7595,
+    deliveryTime: 'Expédition Sécurisée 48h',
+    hubName: 'Hub Medina / Dunes',
+    address: 'Point de retrait & livraison VIP Essaouira'
+  },
+  {
+    id: 'chefchaouen',
+    name: 'Chefchaouen',
+    country: 'Maroc',
+    flag: '🇲🇦',
+    subtitle: 'Cité Bleue Direct Farmz',
+    lat: 35.1688,
+    lng: -5.2636,
+    deliveryTime: 'Livraison Directe & Drop',
+    hubName: 'Hub Rif Central',
+    address: 'Point de retrait & livraison VIP Chefchaouen'
+  },
+  {
+    id: 'alhoceima',
+    name: 'Al Hoceïma',
+    country: 'Maroc',
+    flag: '🇲🇦',
+    subtitle: 'Baie du Rif Exclusive',
+    lat: 35.2472,
+    lng: -3.9322,
+    deliveryTime: 'Expédition Sécurisée 24/48h',
+    hubName: 'Hub Quemado / Cala Bonita',
+    address: 'Point de retrait & livraison VIP Al Hoceïma'
+  },
+  {
+    id: 'dakhla',
+    name: 'Dakhla',
+    country: 'Maroc',
+    flag: '🇲🇦',
+    subtitle: 'Sahara Lagoon VIP Drop',
+    lat: 23.7136,
+    lng: -15.9355,
+    deliveryTime: 'Expédition Aérienne Sécurisée 48/72h',
+    hubName: 'Hub Baie de Dakhla',
+    address: 'Point de retrait & livraison VIP Dakhla'
+  },
+  {
+    id: 'laayoune',
+    name: 'Laâyoune',
+    country: 'Maroc',
+    flag: '🇲🇦',
+    subtitle: 'Sud Atlantique Selection',
+    lat: 27.1536,
+    lng: -13.2033,
+    deliveryTime: 'Expédition Aérienne Sécurisée 48/72h',
+    hubName: 'Hub Al Massira',
+    address: 'Point de retrait & livraison VIP Laâyoune'
+  },
+  {
+    id: 'taza',
+    name: 'Taza',
+    country: 'Maroc',
+    flag: '🇲🇦',
+    subtitle: 'Porte de l\'Atlas Reserve',
+    lat: 34.2139,
+    lng: -4.0108,
+    deliveryTime: 'Expédition Sécurisée 48h',
+    hubName: 'Hub Gare / Centre',
+    address: 'Point de retrait & livraison VIP Taza'
+  },
+  {
+    id: 'settat',
+    name: 'Settat',
+    country: 'Maroc',
+    flag: '🇲🇦',
+    subtitle: 'Chaouia Central Hub',
+    lat: 33.0010,
+    lng: -7.6166,
+    deliveryTime: 'Livraison Express 24h',
+    hubName: 'Hub Chaouia VIP',
+    address: 'Point de retrait & livraison VIP Settat'
+  },
+  {
+    id: 'berrechid',
+    name: 'Berrechid',
+    country: 'Maroc',
+    flag: '🇲🇦',
+    subtitle: 'Axe Casa-Sud VIP',
+    lat: 33.2655,
+    lng: -7.5875,
+    deliveryTime: 'Livraison Express 24h & Meet-up',
+    hubName: 'Hub Berrechid Centre',
+    address: 'Point de retrait & livraison VIP Berrechid'
+  },
+  {
+    id: 'khouribga',
+    name: 'Khouribga',
+    country: 'Maroc',
+    flag: '🇲🇦',
+    subtitle: 'Phosphate Coast Reserve',
+    lat: 32.8811,
+    lng: -6.9063,
+    deliveryTime: 'Expédition Sécurisée 48h',
+    hubName: 'Hub Khouribga VIP',
+    address: 'Point de retrait & livraison VIP Khouribga'
+  },
+  {
+    id: 'larache',
+    name: 'Larache',
+    country: 'Maroc',
+    flag: '🇲🇦',
+    subtitle: 'Nord Atlantique Drop',
+    lat: 35.1932,
+    lng: -6.1557,
+    deliveryTime: 'Livraison 24/48h',
+    hubName: 'Hub Loukkos VIP',
+    address: 'Point de retrait & livraison VIP Larache'
+  },
+  {
+    id: 'ouarzazate',
+    name: 'Ouarzazate',
+    country: 'Maroc',
+    flag: '🇲🇦',
+    subtitle: 'Porte du Désert VIP',
+    lat: 30.9189,
+    lng: -6.8934,
+    deliveryTime: 'Expédition Sécurisée 48h',
+    hubName: 'Hub Atlas Studios',
+    address: 'Point de retrait & livraison VIP Ouarzazate'
+  },
+  {
+    id: 'taroudant',
+    name: 'Taroudant',
+    country: 'Maroc',
+    flag: '🇲🇦',
+    subtitle: 'Petite Marrakech Selection',
+    lat: 30.4703,
+    lng: -8.8770,
+    deliveryTime: 'Expédition 48h',
+    hubName: 'Hub Remparts VIP',
+    address: 'Point de retrait & livraison VIP Taroudant'
+  },
+  {
+    id: 'berkane',
+    name: 'Berkane',
+    country: 'Maroc',
+    flag: '🇲🇦',
+    subtitle: 'Beni Snassen Reserve',
+    lat: 34.9200,
+    lng: -2.3200,
+    deliveryTime: 'Expédition 48h',
+    hubName: 'Hub Berkane / Saïdia',
+    address: 'Point de retrait & livraison VIP Berkane'
+  },
+  {
+    id: 'guelmim',
+    name: 'Guelmim',
+    country: 'Maroc',
+    flag: '🇲🇦',
+    subtitle: 'Porte du Sahara VIP',
+    lat: 28.9870,
+    lng: -10.0574,
+    deliveryTime: 'Expédition 48/72h',
+    hubName: 'Hub Guelmim Sud',
+    address: 'Point de retrait & livraison VIP Guelmim'
+  }
 ];
+
 
 export function isProductInCity(product: VideoItem, cityId?: SupportedCity | string | null): boolean {
   if (!cityId) return true;

@@ -383,7 +383,8 @@ export default function CartDrawer({
                       {/* Thumbnail */}
                       <div className="w-14 h-14 rounded-xl overflow-hidden bg-black shrink-0 border border-white/10">
                         <img
-                          src={item.product.thumbnailUrl || item.product.imageUrl || '/tricoma_logo.png'}
+                          src={item.product.thumbnailUrl || item.product.imageUrl || '/the_hashman_shop_welcome.jpg'}
+
                           alt={item.product.title}
                           className="w-full h-full object-cover"
                         />
@@ -776,8 +777,9 @@ export default function CartDrawer({
                       `Bonjour, voici ma commande #${createdOrder.id} transmise pour finalisation du paiement.`
                     );
                     try {
-                      window.open(`https://t.me/BISCOTTIBOY10?text=${orderText}`, '_blank');
+                      window.open(`https://t.me/yoru47?text=${orderText}`, '_blank');
                     } catch (_) {}
+
                   }}
                   className="w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 hover:opacity-95 text-black font-black text-xs uppercase flex items-center justify-center gap-2 transition cursor-pointer shadow-[0_0_20px_rgba(245,158,11,0.4)] active:scale-98"
                 >

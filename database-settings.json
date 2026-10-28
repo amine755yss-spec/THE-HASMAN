@@ -1,101 +1,101 @@
 {
-  "telegramSupportUrl": "https://t.me/BISCOTTIBOY10",
-  "customAppUrl": "https://biscotti-boys-app.vercel.app",
-  "telegramChannelUrl": "https://t.me/+bMAog56A3AthODM0",
-  "promoImageUrl": "/lost_in_the_rif_welcome.jpg",
+  "logoUrl": "https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0292552802.firebasestorage.app/o/uploads%2Fc7dbae8a-2216-41e8-b3f0-c74a0e015ca6.jpg?alt=media&token=ffd8e9b4-9d68-4591-94fb-b2493a5e5dc1",
   "sectionTitles": [
     {
       "id": "1",
       "text": "THE HASHMAN SHOP",
-      "category": "All",
       "size": "L",
-      "color": "#8B5CF6",
+      "order": 1,
       "enabled": true,
-      "order": 1
+      "category": "All",
+      "color": "#8B5CF6"
     },
     {
       "id": "2",
-      "text": "SELECTION LA MOUSSE",
+      "color": "#8B5CF6",
       "category": "LA MOUSSE",
       "size": "L",
-      "color": "#8B5CF6",
-      "enabled": true,
-      "order": 2
+      "text": "SELECTION LA MOUSSE",
+      "order": 2,
+      "enabled": true
     },
     {
+      "color": "#8B5CF6",
       "id": "3",
-      "text": "SELECTION DRY SIFT",
+      "enabled": true,
       "category": "DRY SIFT",
+      "order": 3,
       "size": "L",
-      "color": "#8B5CF6",
-      "enabled": true,
-      "order": 3
+      "text": "SELECTION DRY SIFT"
     },
     {
-      "id": "4",
+      "enabled": true,
+      "order": 4,
       "text": "SELECTION BELDIA",
-      "category": "BELDIA",
       "size": "L",
-      "color": "#8B5CF6",
-      "enabled": true,
-      "order": 4
+      "id": "4",
+      "category": "BELDIA",
+      "color": "#8B5CF6"
     },
     {
+      "order": 5,
       "id": "5",
-      "text": "SELECTION FROZEN",
-      "category": "FROZEN",
       "size": "L",
-      "color": "#8B5CF6",
+      "text": "SELECTION FROZEN",
       "enabled": true,
-      "order": 5
+      "color": "#8B5CF6",
+      "category": "FROZEN"
     },
     {
       "id": "6",
-      "text": "SELECTION STATIC",
+      "order": 6,
+      "color": "#8B5CF6",
+      "enabled": true,
       "category": "STATIC",
       "size": "L",
-      "color": "#8B5CF6",
-      "enabled": true,
-      "order": 6
+      "text": "SELECTION STATIC"
     },
     {
-      "id": "7",
-      "text": "SELECTION WPFF",
-      "category": "WPFF",
-      "size": "L",
-      "color": "#8B5CF6",
+      "order": 7,
       "enabled": true,
-      "order": 7
+      "text": "SELECTION WPFF",
+      "size": "L",
+      "category": "WPFF",
+      "id": "7",
+      "color": "#8B5CF6"
     },
     {
       "id": "8",
-      "text": "MEET UP RABAT",
-      "category": "MEET UP RABAT",
-      "size": "L",
       "color": "#8B5CF6",
+      "size": "L",
+      "text": "MEET UP RABAT",
+      "order": 8,
       "enabled": true,
-      "order": 8
+      "category": "MEET UP RABAT"
     },
     {
-      "id": "9",
-      "text": "ACCESSOIRES",
       "category": "ACCESSOIRES",
-      "size": "L",
-      "color": "#8B5CF6",
       "enabled": true,
+      "color": "#8B5CF6",
+      "id": "9",
+      "size": "L",
+      "text": "ACCESSOIRES",
       "order": 9
     }
   ],
-  "launchScreenUrl": "https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0292552802.firebasestorage.app/o/uploads%2F35b78507-f852-4a8d-841c-cfe6a1c53d6f.png?alt=media&token=d6059512-ac73-480e-9a4b-80f909809302",
-  "logoUrl": "https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0292552802.firebasestorage.app/o/uploads%2F0613d58f-ca90-4963-aa24-3a523bbef07f.png?alt=media&token=375ae10a-29e5-4b9f-ba26-5eb520adb76c",
-  "introStatusLine": "THE HASHMAN SHOP — BOUTIQUE OFFICIELLE",
-  "appDisabled": false,
-  "promoButtonText": "Boutique 🛍️",
-  "promoMessageText": "🚨 NEW DROP EST DISPONIBLE 🚨\n\nLes nouvelles références sont arrivées. 👀🔥\n\n📲 La mini-application est opérationnelle pour passer vos commandes.\nAppuyez sur 🛒 Shop pour y accéder directement.\n\n⚠️ Si vous n’avez pas encore accès, envoyez votre ID en privé afin d’être ajouté à la liste d’accès.\n@BISCOTTIBOY10\n\nBonne découverte à tous. 💨",
-  "signalUrl": "https://signal.me/#eu/w6NQMTq58RhypsehbArfwBE8e6-MEK-eVR00xyjQk5HJmVv06d9BVLnw6fW-poXa",
+  "homepageHeroBgUrl": "https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0292552802.firebasestorage.app/o/uploads%2F2fc879a6-5e65-4dd5-ae81-1df5299211b7.png?alt=media&token=8cc973af-a2ee-4624-860d-edc7dd40b028",
   "introVideoUrl": "",
-  "introBgUrl": "https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0292552802.firebasestorage.app/o/uploads%2Fb506fd67-bab9-4edc-a389-3909b42dd407.png?alt=media&token=3c826baa-9b7d-4e0d-a490-76aac377eaba",
-  "bgLogoUrl": "https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0292552802.firebasestorage.app/o/uploads%2F3d1d9c1b-f909-45ed-b03e-4ba0adcd4705.png?alt=media&token=2563191b-2a55-4565-adea-87642398a9b9",
-  "homepageHeroBgUrl": "https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0292552802.firebasestorage.app/o/uploads%2F7e869dd6-656b-41d4-9e4e-293c1d4d5142.png?alt=media&token=80c29212-5e84-4597-b462-00999ff82af2",
-  "instagramUrl": ""
+  "signalUrl": "https://signal.me/#eu/w6NQMTq58RhypsehbArfwBE8e6-MEK-eVR00xyjQk5HJmVv06d9BVLnw6fW-poXa",
+  "promoImageUrl": "/the_hashman_shop_welcome.jpg",
+  "telegramChannelUrl": "https://t.me/yoru47",
+  "promoMessageText": "🚨 NEW DROP EST DISPONIBLE 🚨\n\nLes nouvelles références sont arrivées. 👀🔥\n\n📲 La mini-application est opérationnelle pour passer vos commandes.\nAppuyez sur 🛒 Shop pour y accéder directement.\n\n⚠️ Si vous n’avez pas encore accès, envoyez votre ID en privé afin d’être ajouté à la liste d’accès.\n@yoru47\n\nBonne découverte à tous. 💨",
+  "appDisabled": false,
+  "telegramSupportUrl": "https://t.me/yoru47",
+  "customAppUrl": "https://the-hasman.vercel.app",
+  "introStatusLine": "THE HASHMAN SHOP — BOUTIQUE OFFICIELLE",
+  "bgLogoUrl": "https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0292552802.firebasestorage.app/o/uploads%2Fd0fdd2e7-9d62-46fa-8d52-585f7875eb8b.png?alt=media&token=a813f929-4828-4e5a-99bf-4bf66b12499a",
+  "introBgUrl": "https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0292552802.firebasestorage.app/o/uploads%2Fa430f95b-c306-4c01-8809-1c1254d7071b.png?alt=media&token=5b684057-12d6-4f2b-9be3-c4786fe66896",
+  "promoButtonText": "Boutique 🛍️",
+  "instagramUrl": "",
+  "launchScreenUrl": "https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0292552802.firebasestorage.app/o/uploads%2F723e6517-7f86-489d-8502-d7697181a6a5.png?alt=media&token=00407418-31e0-4623-bd6f-b8e01148fa69"
 }
