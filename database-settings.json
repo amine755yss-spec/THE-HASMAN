@@ -1,101 +1,101 @@
 {
-  "introVideoUrl": "",
+  "promoMessageText": "🚨 NEW DROP EST DISPONIBLE 🚨\n\nLes nouvelles références sont arrivées. 👀🔥\n\n📲 La mini-application est opérationnelle pour passer vos commandes.\nAppuyez sur 🛒 Shop pour y accéder directement.\n\n⚠️ Si vous n’avez pas encore accès, envoyez votre ID en privé afin d’être ajouté à la liste d’accès.\n@yoru47\n\nBonne découverte à tous. 💨",
+  "bgLogoUrl": "https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0292552802.firebasestorage.app/o/uploads%2Fd0fdd2e7-9d62-46fa-8d52-585f7875eb8b.png?alt=media&token=a813f929-4828-4e5a-99bf-4bf66b12499a",
   "introBgUrl": "https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0292552802.firebasestorage.app/o/uploads%2Fa430f95b-c306-4c01-8809-1c1254d7071b.png?alt=media&token=5b684057-12d6-4f2b-9be3-c4786fe66896",
-  "customAppUrl": "https://the-hasman.vercel.app",
   "telegramChannelUrl": "https://t.me/yoru47",
   "telegramSupportUrl": "https://t.me/yoru47",
-  "signalUrl": "https://signal.me/#eu/w6NQMTq58RhypsehbArfwBE8e6-MEK-eVR00xyjQk5HJmVv06d9BVLnw6fW-poXa",
-  "promoImageUrl": "/the_hashman_shop_welcome.jpg",
-  "bgLogoUrl": "https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0292552802.firebasestorage.app/o/uploads%2Fd0fdd2e7-9d62-46fa-8d52-585f7875eb8b.png?alt=media&token=a813f929-4828-4e5a-99bf-4bf66b12499a",
-  "launchScreenUrl": "https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0292552802.firebasestorage.app/o/uploads%2F723e6517-7f86-489d-8502-d7697181a6a5.png?alt=media&token=00407418-31e0-4623-bd6f-b8e01148fa69",
+  "customAppUrl": "https://the-hasman.vercel.app",
+  "appDisabled": false,
   "instagramUrl": "",
+  "logoUrl": "https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0292552802.firebasestorage.app/o/uploads%2Fc7dbae8a-2216-41e8-b3f0-c74a0e015ca6.jpg?alt=media&token=ffd8e9b4-9d68-4591-94fb-b2493a5e5dc1",
+  "signalUrl": "https://signal.me/#eu/w6NQMTq58RhypsehbArfwBE8e6-MEK-eVR00xyjQk5HJmVv06d9BVLnw6fW-poXa",
+  "homepageHeroBgUrl": "https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0292552802.firebasestorage.app/o/uploads%2F2fc879a6-5e65-4dd5-ae81-1df5299211b7.png?alt=media&token=8cc973af-a2ee-4624-860d-edc7dd40b028",
+  "launchScreenUrl": "https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0292552802.firebasestorage.app/o/uploads%2F723e6517-7f86-489d-8502-d7697181a6a5.png?alt=media&token=00407418-31e0-4623-bd6f-b8e01148fa69",
   "sectionTitles": [
     {
-      "text": "THE HASHMAN SHOP",
       "category": "All",
       "color": "#8B5CF6",
-      "enabled": true,
       "size": "L",
+      "id": "1",
       "order": 1,
-      "id": "1"
+      "text": "MAES INTERNATIONAL",
+      "enabled": true
     },
     {
-      "text": "SELECTION LA MOUSSE",
-      "color": "#8B5CF6",
       "size": "L",
-      "enabled": true,
-      "order": 2,
+      "color": "#8B5CF6",
       "category": "LA MOUSSE",
-      "id": "2"
+      "order": 2,
+      "id": "2",
+      "text": "SELECTION LA MOUSSE",
+      "enabled": true
     },
     {
       "size": "L",
+      "color": "#8B5CF6",
       "order": 3,
-      "color": "#8B5CF6",
-      "id": "3",
       "enabled": true,
-      "text": "SELECTION DRY SIFT",
-      "category": "DRY SIFT"
+      "id": "3",
+      "category": "DRY SIFT",
+      "text": "SELECTION DRY SIFT"
     },
     {
-      "id": "4",
-      "color": "#8B5CF6",
-      "category": "BELDIA",
       "size": "L",
-      "enabled": true,
+      "color": "#8B5CF6",
       "order": 4,
+      "category": "BELDIA",
+      "enabled": true,
+      "id": "4",
       "text": "SELECTION BELDIA"
     },
     {
-      "category": "FROZEN",
-      "id": "5",
-      "enabled": true,
+      "text": "SELECTION FROZEN",
       "order": 5,
-      "size": "L",
-      "color": "#8B5CF6",
-      "text": "SELECTION FROZEN"
-    },
-    {
-      "order": 6,
-      "id": "6",
-      "text": "SELECTION STATIC",
       "enabled": true,
-      "category": "STATIC",
-      "color": "#8B5CF6",
-      "size": "L"
+      "category": "FROZEN",
+      "size": "L",
+      "id": "5",
+      "color": "#8B5CF6"
     },
     {
-      "text": "SELECTION WPFF",
+      "enabled": true,
+      "text": "SELECTION STATIC",
+      "order": 6,
+      "size": "L",
+      "category": "STATIC",
+      "id": "6",
+      "color": "#8B5CF6"
+    },
+    {
+      "size": "L",
       "id": "7",
       "enabled": true,
-      "category": "WPFF",
       "color": "#8B5CF6",
+      "text": "SELECTION WPFF",
       "order": 7,
-      "size": "L"
+      "category": "WPFF"
     },
     {
-      "text": "MEET UP RABAT",
-      "category": "MEET UP RABAT",
-      "color": "#8B5CF6",
-      "size": "L",
       "enabled": true,
-      "order": 8,
-      "id": "8"
-    },
-    {
+      "category": "MEET UP RABAT",
       "size": "L",
       "color": "#8B5CF6",
-      "category": "ACCESSOIRES",
+      "order": 8,
+      "id": "8",
+      "text": "MEET UP RABAT"
+    },
+    {
       "text": "ACCESSOIRES",
+      "enabled": true,
       "id": "9",
       "order": 9,
-      "enabled": true
+      "color": "#8B5CF6",
+      "size": "L",
+      "category": "ACCESSOIRES"
     }
   ],
-  "logoUrl": "https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0292552802.firebasestorage.app/o/uploads%2Fc7dbae8a-2216-41e8-b3f0-c74a0e015ca6.jpg?alt=media&token=ffd8e9b4-9d68-4591-94fb-b2493a5e5dc1",
-  "appDisabled": false,
+  "promoImageUrl": "/the_hashman_shop_welcome.jpg",
   "introStatusLine": "THE HASHMAN SHOP — BOUTIQUE OFFICIELLE",
-  "promoMessageText": "🚨 NEW DROP EST DISPONIBLE 🚨\n\nLes nouvelles références sont arrivées. 👀🔥\n\n📲 La mini-application est opérationnelle pour passer vos commandes.\nAppuyez sur 🛒 Shop pour y accéder directement.\n\n⚠️ Si vous n’avez pas encore accès, envoyez votre ID en privé afin d’être ajouté à la liste d’accès.\n@yoru47\n\nBonne découverte à tous. 💨",
   "promoButtonText": "Boutique 🛍️",
-  "homepageHeroBgUrl": "https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0292552802.firebasestorage.app/o/uploads%2F2fc879a6-5e65-4dd5-ae81-1df5299211b7.png?alt=media&token=8cc973af-a2ee-4624-860d-edc7dd40b028"
+  "introVideoUrl": ""
 }

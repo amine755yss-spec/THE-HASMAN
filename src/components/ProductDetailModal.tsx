@@ -18,9 +18,10 @@ import {
   Check,
   Flame
 } from 'lucide-react';
-import { VideoItem, getPriceForSize, getSizeOptionsForCategory, getCleanAuthor, hasConfiguredQuantityPricing, getAvailableQuantities, getProductPriceForQuantity } from '../types';
+import { VideoItem, getPriceForSize, getSizeOptionsForCategory, getCleanAuthor, hasConfiguredQuantityPricing, getAvailableQuantities, getProductPriceForQuantity, getProductGramPrice } from '../types';
 import { useLanguage } from '../i18n/LanguageContext';
 import ExtractionBadge from './ExtractionBadge';
+
 
 interface ProductDetailModalProps {
   product: VideoItem;
@@ -287,32 +288,39 @@ export default function ProductDetailModal({
                 {product.title}
               </h1>
 
-              {/* Price display */}
-              <div className="mt-3 flex items-baseline gap-2">
-                <span className="text-xs font-mono text-zinc-400 uppercase">
-                  PRIX :
-                </span>
-                <AnimatePresence mode="wait">
-                  {!selectedSize ? (
-                    <motion.span 
-                      key="base"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      className="text-xl font-mono font-black text-amber-300"
-                    >
-                      {product.price} €
-                    </motion.span>
-                  ) : (
-                    <motion.span 
-                      key="computed"
-                      initial={{ opacity: 0, scale: 0.9 }}
+              {/* Price display & Unit Price per gram */}
+              <div className="mt-3 flex flex-col gap-1.5">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-mono font-bold text-zinc-400 uppercase tracking-wider">
+                    PRIX TOTAL :
+                  </span>
+                  {/* Gram Price Badge */}
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-extrabold bg-purple-500/15 border border-purple-500/40 text-purple-300 shadow-[0_0_10px_rgba(168,85,247,0.3)]">
+                    <Sparkles className="w-3 h-3 text-purple-400 animate-pulse" />
+                    Prix du gramme : <strong className="text-white">{getProductGramPrice(product)} € / g</strong>
+                  </span>
+                </div>
+
+                <div className="flex items-baseline gap-2.5">
+                  <AnimatePresence mode="wait">
+                    <motion.div 
+                      key={selectedSize || 'base'}
+                      initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      className="text-2xl font-mono font-black text-amber-300 bg-amber-500/15 border border-amber-400/40 px-2.5 py-0.5 rounded-lg"
+                      transition={{ duration: 0.2 }}
+                      className="flex items-baseline gap-2"
                     >
-                      {computedPrice} € <span className="text-xs text-zinc-300 font-medium">({selectedSize})</span>
-                    </motion.span>
-                  )}
-                </AnimatePresence>
+                      <span className="text-3xl font-mono font-black tracking-tight text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">
+                        {Number(computedPrice).toFixed(2)} €
+                      </span>
+                      {selectedSize && (
+                        <span className="text-xs font-mono font-bold text-purple-400 px-2 py-0.5 rounded-md bg-purple-950/60 border border-purple-800/40">
+                          {selectedSize} • {Math.round(computedPrice / (selectedSize === '5G' ? 5 : selectedSize === '10G' ? 10 : selectedSize === '25G' ? 25 : selectedSize === '50G' ? 50 : selectedSize === '100G' ? 100 : 1))}€/g
+                        </span>
+                      )}
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
               </div>
             </div>
 
@@ -326,49 +334,66 @@ export default function ProductDetailModal({
               </p>
             </div>
 
-            {/* Size / Weight Selector */}
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-[10px] uppercase font-mono font-bold text-zinc-400 tracking-wider block">
-                  {hasQuantityPricing ? 'CHOISISSEZ LA QUANTITÉ :' : 'CHOISISSEZ LE FORMAT / GRAMMAGE :'}
+            {/* User's Exact Quantity Selection Panel (Replicating reference photo) */}
+            <div className="relative rounded-3xl p-5 sm:p-6 bg-gradient-to-br from-[#2D0D35]/85 via-[#1C0926]/90 to-[#2A0E34]/85 border border-purple-500/30 shadow-[0_0_35px_rgba(168,85,247,0.18)] overflow-hidden">
+              
+              {/* Header: • SÉLECTIONNEZ UNE QUANTITÉ */}
+              <div className="flex items-center gap-2 mb-4">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#E879F9] shadow-[0_0_10px_#E879F9]" />
+                <span className="text-xs sm:text-[13px] font-sans font-black tracking-[0.25em] text-[#F3E8FF] uppercase">
+                  SÉLECTIONNEZ UNE QUANTITÉ
                 </span>
-                {selectedSize && (
-                  <span className="text-[10px] font-mono text-amber-400 font-bold">
-                    {selectedSize} • €{computedPrice}
-                  </span>
-                )}
               </div>
 
-              <div className={`grid gap-2 ${sizeOptions.length === 4 ? 'grid-cols-4' : sizeOptions.length === 2 ? 'grid-cols-2' : 'grid-cols-3'}`}>
+              {/* Quantities Grid (3 on top row: 5G, 10G, 25G | 2 on bottom row: 50G, 100G) */}
+              <div className="grid grid-cols-3 gap-3">
                 {sizeOptions.map((sz) => {
                   const isSelected = selectedSize === sz;
                   const optionPrice = getProductPriceForQuantity(product, sz);
+                  const formattedPrice = `${Number(optionPrice).toFixed(2)}€`;
+
                   return (
                     <button
                       key={sz}
+                      type="button"
                       disabled={isOutOfStock}
                       onClick={() => {
                         if (isOutOfStock) return;
                         triggerHaptic('medium');
                         setSelectedSize(sz);
                       }}
-                      className={`py-2 px-1 text-center rounded-xl border tracking-wide transition-all duration-300 cursor-pointer ${
+                      className={`relative rounded-2xl py-3.5 px-2 text-center transition-all duration-200 cursor-pointer flex flex-col items-center justify-center select-none active:scale-95 ${
                         isOutOfStock
-                          ? 'bg-zinc-900 border-white/5 text-zinc-600 cursor-not-allowed opacity-50'
-                          : isSelected 
-                            ? 'bg-amber-400 border-amber-300 text-black shadow-[0_0_12px_rgba(245,158,11,0.5)] font-bold' 
-                            : 'bg-zinc-900/90 border-white/10 text-zinc-300 hover:border-amber-400/50 hover:text-amber-300'
+                          ? 'bg-[#180A22]/50 border border-white/5 opacity-40 cursor-not-allowed'
+                          : isSelected
+                          ? 'bg-[#48165F]/55 border-2 border-[#D946EF] shadow-[0_0_20px_rgba(217,70,239,0.45)]'
+                          : 'bg-[#261234]/40 hover:bg-[#321743]/50 border border-purple-400/15 hover:border-purple-400/30'
                       }`}
                     >
-                      <div className="text-xs font-mono font-black">{sz}</div>
-                      <div className={`text-[10px] font-mono mt-0.5 ${isSelected ? 'text-black/90 font-bold' : 'text-amber-300/80 font-medium'}`}>
-                        €{optionPrice}
-                      </div>
+                      {/* Weight label (5G, 10G, 25G, 50G, 100G) */}
+                      <span className={`text-xs sm:text-sm font-bold tracking-wide uppercase mb-1 transition ${
+                        isSelected ? 'text-white' : 'text-purple-200/90'
+                      }`}>
+                        {sz}
+                      </span>
+
+                      {/* Formatted Price (e.g. 80.00€, 160.00€) */}
+                      <span className="text-sm sm:text-lg font-black tracking-tight text-white">
+                        {formattedPrice}
+                      </span>
+
+                      {/* Checkmark badge on selected (White circle with dark check on top-right) */}
+                      {isSelected && (
+                        <div className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-white text-black flex items-center justify-center shadow-[0_2px_8px_rgba(0,0,0,0.6)]">
+                          <Check className="w-3.5 h-3.5 stroke-[3.5] text-black" />
+                        </div>
+                      )}
                     </button>
                   );
                 })}
               </div>
             </div>
+
 
             {/* Guarantees */}
             <div className="grid grid-cols-2 gap-2 pt-1">

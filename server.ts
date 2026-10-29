@@ -1592,7 +1592,7 @@ const DEFAULT_SETTINGS = {
 
   introStatusLine: 'THE HASHMAN SHOP — BOUTIQUE OFFICIELLE',
   sectionTitles: [
-    { id: '1', text: 'THE HASHMAN SHOP', category: 'All', size: 'L', color: '#D4AF37', enabled: true, order: 1 },
+    { id: '1', text: 'MAES INTERNATIONAL', category: 'All', size: 'L', color: '#D4AF37', enabled: true, order: 1 },
     { id: '2', text: 'SELECTION DRY SIFT', category: 'DRY SIFT', size: 'L', color: '#D4AF37', enabled: true, order: 2 },
     { id: '3', text: 'SELECTION BELDIA', category: 'BELDIA', size: 'L', color: '#D4AF37', enabled: true, order: 3 },
     { id: '4', text: 'SELECTION LA MOUSSE', category: 'LA MOUSSE', size: 'L', color: '#D4AF37', enabled: true, order: 4 },
@@ -1608,6 +1608,11 @@ function sanitizeSettingsData(data: any): any {
   if (!data || typeof data !== 'object') return data;
   if (data.introStatusLine && (/biscotti|farm(\s*of\s*friends)?|greenfarmez|elanasser|tricom|rif|house/i.test(data.introStatusLine) || data.introStatusLine.includes('RÉSERVE PRIVÉE') || data.introStatusLine !== 'THE HASHMAN SHOP — BOUTIQUE OFFICIELLE')) {
     data.introStatusLine = 'THE HASHMAN SHOP — BOUTIQUE OFFICIELLE';
+  }
+  if (data.sectionTitles && Array.isArray(data.sectionTitles) && data.sectionTitles.length > 0) {
+    if (data.sectionTitles[0].text === 'THE HASHMAN SHOP') {
+      data.sectionTitles[0].text = 'MAES INTERNATIONAL';
+    }
   }
   return data;
 }

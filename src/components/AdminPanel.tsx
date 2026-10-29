@@ -518,8 +518,10 @@ export default function AdminPanel({
   const [newBadgeType, setNewBadgeType] = useState<string>('NONE');
   const [newBadgePromo, setNewBadgePromo] = useState<string>('-10%');
 
-  // Quantity-based pricing states
+  // Quantity-based pricing states (10G, 25G, 50G, 100G)
   const [newQuantityPricing, setNewQuantityPricing] = useState<Record<QuantityOption, string | number>>({
+    '10g': '',
+    '25g': '',
     '50g': '',
     '100g': '',
     '500g': '',
@@ -527,11 +529,14 @@ export default function AdminPanel({
   });
 
   const [editQuantityPricing, setEditQuantityPricing] = useState<Record<QuantityOption, string | number>>({
+    '10g': '',
+    '25g': '',
     '50g': '',
     '100g': '',
     '500g': '',
     '1kg': ''
   });
+
   
   // Native files and media preview states with upload loading states to prevent base64 leaks
   const [videoPreviewUrl, setVideoPreviewUrl] = useState<string>('');
@@ -1077,19 +1082,28 @@ export default function AdminPanel({
           }
         }
       });
+      const rawGramPrice = Number(newPrice) > 0 ? Number(newPrice) : (Number(cleanedPricing['10g']) > 0 ? Number(cleanedPricing['10g']) / 10 : 10);
+      
+      // Auto-calculate 10g, 25g, 50g, 100g directly if not manually overridden
+      if (rawGramPrice > 0) {
+        if (!cleanedPricing['10g']) cleanedPricing['10g'] = Math.round(10 * rawGramPrice);
+        if (!cleanedPricing['25g']) cleanedPricing['25g'] = Math.round(25 * rawGramPrice);
+        if (!cleanedPricing['50g']) cleanedPricing['50g'] = Math.round(50 * rawGramPrice);
+        if (!cleanedPricing['100g']) cleanedPricing['100g'] = Math.round(100 * rawGramPrice);
+      }
+
       const hasPricing = Object.keys(cleanedPricing).length > 0;
-      const primaryPrice = hasPricing
-        ? (cleanedPricing['100g'] || cleanedPricing['50g'] || cleanedPricing['500g'] || cleanedPricing['1kg'] || Number(newPrice))
-        : Number(newPrice);
+      const primaryPrice = cleanedPricing['10g'] || (rawGramPrice * 10);
 
       const freshProd: VideoItem = {
         id: uId,
         title: newTitle.toUpperCase(),
         description: newDesc,
         price: primaryPrice,
-        pricePerGram: primaryPrice,
+        pricePerGram: rawGramPrice,
         currency: 'EUR',
         category: newCategory,
+
         city: newCities.length > 0 ? newCities[0] : undefined,
         cities: newCities,
         displayZone: newDisplayZone || undefined,
@@ -1146,11 +1160,14 @@ export default function AdminPanel({
     setEditingProduct({ ...p });
     // Load existing quantity prices or reset to empty
     setEditQuantityPricing({
-      '50g': p.pricing?.['50g'] !== undefined ? p.pricing['50g'] : '',
-      '100g': p.pricing?.['100g'] !== undefined ? p.pricing['100g'] : '',
+      '10g': p.pricing?.['10g'] !== undefined ? p.pricing['10g'] : (p.pricePerGram ? p.pricePerGram * 10 : ''),
+      '25g': p.pricing?.['25g'] !== undefined ? p.pricing['25g'] : (p.pricePerGram ? p.pricePerGram * 25 : ''),
+      '50g': p.pricing?.['50g'] !== undefined ? p.pricing['50g'] : (p.pricePerGram ? p.pricePerGram * 50 : ''),
+      '100g': p.pricing?.['100g'] !== undefined ? p.pricing['100g'] : (p.pricePerGram ? p.pricePerGram * 100 : ''),
       '500g': p.pricing?.['500g'] !== undefined ? p.pricing['500g'] : '',
       '1kg': p.pricing?.['1kg'] !== undefined ? p.pricing['1kg'] : ''
     });
+
     const form = document.getElementById('edit-form-anchor');
     if (form) form.scrollIntoView({ behavior: 'smooth' });
   };
@@ -1491,13 +1508,29 @@ export default function AdminPanel({
                   </div>
 
                   <div>
-                    <label className="block text-[8px] font-mono text-gray-500 uppercase mb-1">Prix par défaut (€) :</label>
+                    <label className="block text-[8px] font-mono text-purple-400 uppercase mb-1 font-bold">
+                      💎 Prix du Gramme (€ / g) :
+                    </label>
                     <input
                       type="number"
                       value={newPrice}
-                      onChange={(e) => setNewPrice(Number(e.target.value))}
+                      onChange={(e) => {
+                        const val = Number(e.target.value);
+                        setNewPrice(val);
+                        if (val > 0) {
+                          setNewQuantityPricing({
+                            '10g': Math.round(10 * val),
+                            '25g': Math.round(25 * val),
+                            '50g': Math.round(50 * val),
+                            '100g': Math.round(100 * val),
+                            '500g': '',
+                            '1kg': ''
+                          });
+                        }
+                      }}
                       className="w-full text-xs py-2 px-2.5 rounded-lg bg-black border border-[#222] focus:border-[#D4AF37] outline-none text-white font-mono"
                       min="1"
+                      placeholder="Ex: 12 (calcule auto 10G=120€, 25G=300€...)"
                       required
                     />
                   </div>
@@ -1508,15 +1541,31 @@ export default function AdminPanel({
                   <div className="flex items-center justify-between">
                     <label className="block text-[9px] font-mono text-[#D4AF37] font-bold uppercase tracking-wider flex items-center gap-1.5">
                       <Sparkles className="w-3 h-3 text-[#D4AF37]" />
-                      <span>QUANTITY PRICING (TARIFS PAR QUANTITÉ) :</span>
+                      <span>TARIFS 10G, 25G, 50G, 100G (CALCUL DIRECT) :</span>
                     </label>
-                    <span className="text-[7.5px] font-mono text-zinc-500 uppercase">
-                      Prix indépendants (€)
-                    </span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const val = Number(newPrice) || 12;
+                        setNewQuantityPricing({
+                          '10g': Math.round(10 * val),
+                          '25g': Math.round(25 * val),
+                          '50g': Math.round(50 * val),
+                          '100g': Math.round(100 * val),
+                          '500g': '',
+                          '1kg': ''
+                        });
+                        triggerHaptic('light');
+                      }}
+                      className="text-[8px] font-mono font-bold px-2 py-0.5 rounded bg-purple-600/30 text-purple-300 border border-purple-500/40 hover:bg-purple-600/50 cursor-pointer"
+                    >
+                      ⚡ Recalculer auto ({newPrice || 12}€/g)
+                    </button>
                   </div>
                   <p className="text-[8px] text-zinc-400 font-mono">
-                    Chaque quantité a son propre tarif. Les quantités laissées vides ne seront pas affichées au client.
+                    Calcul automatique direct : 10G, 25G, 50G et 100G. Vous pouvez ajuster chaque palier manuellement si besoin.
                   </p>
+
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                     {QUANTITY_OPTIONS.map((qty) => (
                       <div key={qty} className="p-2 rounded-lg bg-zinc-950 border border-zinc-800 space-y-1">

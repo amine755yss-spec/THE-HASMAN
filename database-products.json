@@ -1,38 +1,27 @@
 [
   {
-    "title": "GMO X RUNTZ🍰🍓",
+    "city": "casablanca",
     "thumbnailUrl": "https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0292552802.firebasestorage.app/o/uploads%2F2859d0e5-6fc9-4de5-a437-91b420d557bc.jpg?alt=media&token=d3b9917c-2486-4c5c-8780-a108dbdf7aee",
-    "cities": [
-      "casablanca",
-      "rabat",
-      "marrakech",
-      "tanger",
-      "agadir",
-      "fes"
-    ],
+    "id": "omerta-custom-1789426483100",
+    "imageUrl": "",
+    "price": 5,
+    "description": "• Notes de burger grillé, d’ail et de gaz, avec une finition crémeuse et épicée. 🍔⛽🔥",
+    "duration": "0:15",
+    "views": 624,
+    "author": "THE HASHMAN SHOP",
+    "currency": "EUR",
     "pricing": {
-      "1kg": 2500,
       "100g": 350,
+      "1kg": 2500,
       "500g": 1500,
       "50g": 200
     },
-    "currency": "EUR",
-    "price": 350,
-    "videoUrl": "https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0292552802.firebasestorage.app/o/uploads%2Fe7dbfbd5-2ac4-47e8-8d55-3011c15281e1.MP4_secure_compat.mp4?alt=media&token=6ccd3807-e17d-49f4-a94e-4c6d91ecdd03",
-    "imageUrl": "",
-    "city": "casablanca",
-    "pricePerGram": 350,
-    "duration": "0:15",
-    "views": 624,
-    "isFeatured": true,
     "isPremium": true,
     "category": "FROZEN",
     "additionalPhotos": [],
-    "description": "• Notes de burger grillé, d’ail et de gaz, avec une finition crémeuse et épicée. 🍔⛽🔥",
-    "author": "RÉSERVE PRIVÉE",
-    "id": "omerta-custom-1789426483100"
-  },
-  {
+    "pricePerGram": 5,
+    "title": "GMO X RUNTZ🍰🍓",
+    "isFeatured": true,
     "cities": [
       "casablanca",
       "rabat",
@@ -41,23 +30,7 @@
       "agadir",
       "fes"
     ],
-    "city": "casablanca",
-    "title": "ALIEN CHERRY LEMON🍇🍒🍋",
-    "currency": "EUR",
-    "videoUrl": "https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0292552802.firebasestorage.app/o/uploads%2F899b5f2e-80eb-4e2c-9653-1bc80bb03cf2.MP4_secure_compat.mp4?alt=media&token=fd809aec-daca-48a7-a748-9a298b96adc3",
-    "views": 1252,
-    "description": "— Un profil fruité et gourmand mêlant des notes de pêche douce, raisin mûr et une touche de citron frais. Un mélange sucré, tropical et légèrement acidulé, avec une belle fraîcheur en bouche.",
-    "category": "STATIC",
-    "additionalPhotos": [],
-    "imageUrl": "",
-    "pricePerGram": 8,
-    "isFeatured": true,
-    "author": "THE HASHMAN SHOP",
-    "isPremium": true,
-    "id": "omerta-custom-1787518977330",
-    "duration": "0:15",
-    "thumbnailUrl": "https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0292552802.firebasestorage.app/o/uploads%2Ff05a58c4-9485-403a-bc28-ebc611ad726f.jpg?alt=media&token=abbf1869-f11e-4943-837f-9c6d85dda12e",
     "badge": "IN_STOCK",
-    "price": 8
+    "videoUrl": "https://firebasestorage.googleapis.com/v0/b/gen-lang-client-0292552802.firebasestorage.app/o/uploads%2Fe7dbfbd5-2ac4-47e8-8d55-3011c15281e1.MP4_secure_compat.mp4?alt=media&token=6ccd3807-e17d-49f4-a94e-4c6d91ecdd03"
   }
 ]

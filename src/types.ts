@@ -419,15 +419,20 @@ export function isProductInCity(product: VideoItem, cityId?: SupportedCity | str
   return true;
 }
 
-export type QuantityOption = '50g' | '100g' | '500g' | '1kg';
-export const QUANTITY_OPTIONS: QuantityOption[] = ['50g', '100g', '500g', '1kg'];
+export type QuantityOption = '5g' | '10g' | '25g' | '50g' | '100g' | '500g' | '1kg';
+export const QUANTITY_OPTIONS: QuantityOption[] = ['5g', '10g', '25g', '50g', '100g'];
+export const STANDARD_HASH_QUANTITIES: string[] = ['5G', '10G', '25G', '50G', '100G'];
 
 export interface QuantityPricing {
+  '5g'?: number;
+  '10g'?: number;
+  '25g'?: number;
   '50g'?: number;
   '100g'?: number;
   '500g'?: number;
   '1kg'?: number;
 }
+
 
 export interface VideoItem {
   id: string;
@@ -538,9 +543,9 @@ export const DEFAULT_MARQUEE_CONFIG: MarqueeConfig = {
   speed: 'medium',
   items: [
     { id: 'm1', text: '💎 THE HASHMAN SHOP — SÉLECTION OFFICIELLE 💎', active: true, order: 1 },
-    { id: 'm2', text: '🇲🇦 CASABLANCA • 🇲🇦 RABAT • 🇲🇦 MARRAKECH • 🇲🇦 TANGER • 🇲🇦 AGADIR • 🇲🇦 FÈS', active: true, order: 2 },
-    { id: 'm3', text: '🚀 EXPÉDITION & RETRAIT 24H/48H PARTOUT AU MAROC', active: true, order: 3 },
-    { id: 'm4', text: '✨ EXTRACTIONS D\'EXCEPTION & SÉLECTIONS D\'ÉLITE', active: true, order: 4 },
+    { id: 'm2', text: '🌐 MAES INTERNATIONAL — SÉLECTIONS D\'ÉLITE & EXTRACTIONS VIP 🌐', active: true, order: 2 },
+    { id: 'm3', text: '🇲🇦 CASABLANCA • 🇲🇦 RABAT • 🇲🇦 MARRAKECH • 🇲🇦 TANGER • 🇲🇦 AGADIR • 🇲🇦 FÈS', active: true, order: 3 },
+    { id: 'm4', text: '🚀 EXPÉDITION & RETRAIT SÉCURISÉ 24H/48H PARTOUT AU MAROC', active: true, order: 4 },
     { id: 'm5', text: '👑 ESPACE VIP : OFFRES RÉSERVÉES & CATALOGUE EXCLUSIF', active: true, order: 5 },
   ],
 };
@@ -569,6 +574,8 @@ export interface BrandingSettings {
   promoButtonText?: string;
   promoButtonText2?: string;
   promoImageUrl?: string;
+  bgAudioUrl?: string;
+  introMusicTitle?: string;
 }
 
 export interface WhitelistItem {
@@ -588,20 +595,40 @@ export interface PendingApproval {
   status: 'PENDING' | 'APPROVED' | 'REJECTED';
 }
 
+export function getProductGramPrice(product: VideoItem): number {
+  if (typeof product.pricePerGram === 'number' && product.pricePerGram > 0) {
+    return product.pricePerGram;
+  }
+  if (product.pricing && typeof product.pricing['5g'] === 'number' && product.pricing['5g'] > 0) {
+    return Math.round((product.pricing['5g'] / 5) * 100) / 100;
+  }
+  if (product.pricing && typeof product.pricing['10g'] === 'number' && product.pricing['10g'] > 0) {
+    return Math.round((product.pricing['10g'] / 10) * 100) / 100;
+  }
+  if (product.pricing && typeof product.pricing['100g'] === 'number' && product.pricing['100g'] > 0) {
+    return Math.round((product.pricing['100g'] / 100) * 100) / 100;
+  }
+  const base = typeof product.price === 'number' ? product.price : (Number(product.price) || 12);
+  if (base <= 30) return base;
+  if (base <= 350) return Math.round((base / 10) * 10) / 10;
+  return Math.round((base / 100) * 10) / 10;
+}
+
 export function getSizeOptionsForCategory(category?: string): string[] {
   const cat = (category || '').trim().toLowerCase();
   if (cat.includes('accessoire') || cat.includes('accessories')) {
     return ['1 unité', '2 unités', '3 unités', '5 unités', '10 unités'];
   }
-  return ['100G', '500G', '1KG'];
+  return ['5G', '10G', '25G', '50G', '100G'];
 }
 
 export function getDefaultSizeForProduct(product: VideoItem): string {
   const options = getSizeOptionsForCategory(product.category);
-  return options[0] || '100G';
+  return options[0] || '5G';
 }
 
 export function hasConfiguredQuantityPricing(product: VideoItem): boolean {
+  if (typeof product.pricePerGram === 'number' && product.pricePerGram > 0) return true;
   if (!product.pricing || typeof product.pricing !== 'object') return false;
   return QUANTITY_OPTIONS.some((qty) => {
     const p = product.pricing?.[qty];
@@ -610,50 +637,55 @@ export function hasConfiguredQuantityPricing(product: VideoItem): boolean {
 }
 
 export function getAvailableQuantities(product: VideoItem): string[] {
-  if (hasConfiguredQuantityPricing(product)) {
-    return QUANTITY_OPTIONS.filter((qty) => {
-      const p = product.pricing?.[qty];
-      return typeof p === 'number' && !isNaN(p) && p > 0;
-    });
+  const cat = (product.category || '').trim().toLowerCase();
+  if (cat.includes('accessoire') || cat.includes('accessories')) {
+    return ['1 unité', '2 unités', '3 unités', '5 unités', '10 unités'];
   }
-  return getSizeOptionsForCategory(product.category);
+  return ['5G', '10G', '25G', '50G', '100G'];
 }
 
 export function getProductPriceForQuantity(product: VideoItem, quantity?: string | null): number {
-  if (quantity && product.pricing && typeof product.pricing === 'object') {
-    const qKey = quantity.trim() as QuantityOption;
-    if (product.pricing[qKey] !== undefined && typeof product.pricing[qKey] === 'number') {
-      return product.pricing[qKey]!;
-    }
-    const lower = quantity.toLowerCase().replace(/\s+/g, '');
-    for (const [key, val] of Object.entries(product.pricing)) {
-      if (key.toLowerCase().replace(/\s+/g, '') === lower && typeof val === 'number') {
-        return val;
-      }
+  const gramPrice = getProductGramPrice(product);
+  if (!quantity) {
+    return Math.round(5 * gramPrice);
+  }
+
+  const clean = quantity.toUpperCase().replace(/\s+/g, '');
+  const lowerKey = quantity.toLowerCase().replace(/\s+/g, '') as QuantityOption;
+
+  // 1. Manuel override dans product.pricing si saisi
+  if (product.pricing && typeof product.pricing === 'object') {
+    if (product.pricing[lowerKey] !== undefined && typeof product.pricing[lowerKey] === 'number') {
+      return product.pricing[lowerKey]!;
     }
   }
-  // Le prix saisi par l'administrateur est définitif : aucun calcul automatique ni multiplication
+
+  // 2. Calcul direct et automatique : Quantité (en grammes) * Prix du gramme
+  if (clean === '5G' || clean === '5') return Math.round(5 * gramPrice);
+  if (clean === '10G' || clean === '10') return Math.round(10 * gramPrice);
+  if (clean === '25G' || clean === '25') return Math.round(25 * gramPrice);
+  if (clean === '50G' || clean === '50') return Math.round(50 * gramPrice);
+  if (clean === '100G' || clean === '100') return Math.round(100 * gramPrice);
+
+  // Unités accessoires
+  if (clean.includes('UNITÉ') || clean.includes('UNITE')) {
+    const qtyNum = parseInt(clean, 10) || 1;
+    return Math.round(qtyNum * (product.price || 15));
+  }
+
   return typeof product.price === 'number' ? product.price : (Number(product.price) || 0);
 }
 
 export function getProductDisplayPrice(product: VideoItem): { price: number; label?: string } {
-  if (hasConfiguredQuantityPricing(product)) {
-    const validEntries = Object.entries(product.pricing!).filter(
-      ([_, val]) => typeof val === 'number' && !isNaN(val) && val > 0
-    ) as [QuantityOption, number][];
-    if (validEntries.length > 0) {
-      const minEntry = validEntries.reduce((prev, curr) => (curr[1] < prev[1] ? curr : prev));
-      return { price: minEntry[1], label: `dès ${minEntry[0]}` };
-    }
-  }
-  const rawPrice = typeof product.price === 'number' ? product.price : (Number(product.price) || 0);
-  return { price: rawPrice };
+  const gramPrice = getProductGramPrice(product);
+  const start10g = Math.round(10 * gramPrice);
+  return { price: start10g, label: `dès 10G (${gramPrice}€/g)` };
 }
 
 export function getPriceForSize(basePrice: number, _size?: string, _category?: string): number {
-  // Aucun calcul automatique : le prix posé est définitif
   return typeof basePrice === 'number' ? basePrice : (Number(basePrice) || 0);
 }
+
 
 export interface Reward {
   id: string;

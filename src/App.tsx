@@ -242,9 +242,10 @@ export default function App() {
 
   // Initialize background soundtrack
   useEffect(() => {
-    audioRef.current = new Audio();
+    const audioUrl = branding?.bgAudioUrl || '/hashman_vip_track.mp3';
+    audioRef.current = new Audio(audioUrl);
     audioRef.current.loop = true;
-    audioRef.current.volume = 0.25;
+    audioRef.current.volume = 0.35;
 
     // Load initial cart state
     try {
@@ -262,7 +263,8 @@ export default function App() {
         audioRef.current = null;
       }
     };
-  }, []);
+  }, [branding?.bgAudioUrl]);
+
 
   // Main data fetch & authorization check
   const loadData = async (silent = false) => {
@@ -362,32 +364,57 @@ export default function App() {
   }, []);
 
   const toggleAudio = () => {
-    if (!audioRef.current) return;
+    if (!audioRef.current) {
+      audioRef.current = new Audio(branding?.bgAudioUrl || '/hashman_vip_track.mp3');
+      audioRef.current.loop = true;
+      audioRef.current.volume = 0.35;
+    }
     if (audioPlaying) {
       audioRef.current.pause();
       setAudioPlaying(false);
     } else {
+      if (!audioRef.current.src || audioRef.current.src === '' || audioRef.current.src.endsWith('/')) {
+        audioRef.current.src = branding?.bgAudioUrl || '/hashman_vip_track.mp3';
+      }
       audioRef.current.play()
         .then(() => setAudioPlaying(true))
         .catch(err => {
-          console.warn('Audio play blocked by browser sandbox policies:', err);
-          showToast('Activez l\'audio en touchant l\'écran.');
+          console.warn('Audio play blocked:', err);
+          showToast('Appuyez pour activer le son VIP 🎵');
         });
     }
   };
 
   const handleEnter = useCallback(() => {
     setHasEntered(true);
-    // Auto-trigger ambience audio if toggle state was enabled
-    if (audioPlaying && audioRef.current) {
-      audioRef.current.play().catch(() => setAudioPlaying(false));
-    } else {
-      // Prompt high audio fidelity play on first interaction
-      audioRef.current?.play()
-        .then(() => setAudioPlaying(true))
-        .catch(() => setAudioPlaying(false));
+    triggerHaptic('medium');
+    
+    // Auto-start soundtrack on entry
+    if (!audioRef.current) {
+      audioRef.current = new Audio(branding?.bgAudioUrl || '/hashman_vip_track.mp3');
+      audioRef.current.loop = true;
+      audioRef.current.volume = 0.35;
     }
-  }, [audioPlaying]);
+    if (audioRef.current) {
+      if (!audioRef.current.src || audioRef.current.src === '' || audioRef.current.src.endsWith('/')) {
+        audioRef.current.src = branding?.bgAudioUrl || '/hashman_vip_track.mp3';
+      }
+      audioRef.current.play()
+        .then(() => setAudioPlaying(true))
+        .catch(err => {
+          console.warn('Auto-play gesture required:', err);
+          // Auto-resume on next user tap anywhere
+          const startOnFirstTap = () => {
+            audioRef.current?.play().then(() => setAudioPlaying(true)).catch(() => {});
+            window.removeEventListener('click', startOnFirstTap);
+            window.removeEventListener('touchstart', startOnFirstTap);
+          };
+          window.addEventListener('click', startOnFirstTap, { once: true });
+          window.addEventListener('touchstart', startOnFirstTap, { once: true });
+        });
+    }
+  }, [branding?.bgAudioUrl, triggerHaptic]);
+
 
   // Add to cart with price calculation
   const handleAddToCart = (product: VideoItem, size: string, color: { name: string; hex: string; imageUrl: string }) => {
@@ -724,6 +751,32 @@ export default function App() {
           {/* Right Action Icons Bar */}
           <div className="flex items-center gap-1.5 md:gap-2">
 
+            {/* VIP Music Equalizer & Toggle */}
+            <button
+              onClick={() => {
+                triggerHaptic('light');
+                toggleAudio();
+              }}
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-2xl border transition cursor-pointer select-none active:scale-95 ${
+                audioPlaying 
+                  ? 'bg-purple-950/80 border-purple-500/60 text-purple-300 shadow-[0_0_15px_rgba(168,85,247,0.45)]'
+                  : 'bg-white/5 border-white/10 text-neutral-400 hover:text-white hover:border-white/20'
+              }`}
+              title={audioPlaying ? 'Maes - International 🎵 (Mettre en pause)' : 'Lancer Maes - International 🎵'}
+            >
+              {audioPlaying ? (
+                <div className="flex items-end gap-0.5 h-3.5 w-3.5">
+                  <span className="w-0.5 bg-purple-400 rounded-full animate-[bounce_0.8s_infinite] h-full" />
+                  <span className="w-0.5 bg-pink-400 rounded-full animate-[bounce_1.1s_infinite] h-2/3" />
+                  <span className="w-0.5 bg-purple-300 rounded-full animate-[bounce_0.6s_infinite] h-5/6" />
+                </div>
+              ) : (
+                <VolumeX className="w-3.5 h-3.5" />
+              )}
+              <span className="font-mono text-[9px] font-bold uppercase tracking-wider hidden xs:inline">
+                {audioPlaying ? 'MAES • INTER' : 'SON 🔇'}
+              </span>
+            </button>
 
             {/* Search Trigger */}
             <button

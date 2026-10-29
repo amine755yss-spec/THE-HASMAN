@@ -567,7 +567,7 @@ export async function deleteOrder(orderId: string): Promise<void> {
 
 export async function getBrandingSettings(): Promise<BrandingSettings> {
   const defaultTitles: SectionTitle[] = [
-    { id: '1', text: 'THE HASHMAN SHOP', category: 'All', size: 'L', color: '#D4AF37', enabled: true, order: 1 },
+    { id: '1', text: 'MAES INTERNATIONAL', category: 'All', size: 'L', color: '#D4AF37', enabled: true, order: 1 },
     { id: '2', text: 'SELECTION DRY', category: 'DRY', size: 'L', color: '#D4AF37', enabled: true, order: 2 },
     { id: '3', text: 'SELECTION FROZEN', category: 'FROZEN', size: 'L', color: '#D4AF37', enabled: true, order: 3 },
     { id: '4', text: 'SELECTION STATIC', category: 'STATIC', size: 'L', color: '#D4AF37', enabled: true, order: 4 }
