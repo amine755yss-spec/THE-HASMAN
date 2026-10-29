@@ -762,7 +762,7 @@ export default function App() {
                   ? 'bg-purple-950/80 border-purple-500/60 text-purple-300 shadow-[0_0_15px_rgba(168,85,247,0.45)]'
                   : 'bg-white/5 border-white/10 text-neutral-400 hover:text-white hover:border-white/20'
               }`}
-              title={audioPlaying ? 'Maes - International 🎵 (Mettre en pause)' : 'Lancer Maes - International 🎵'}
+              title={audioPlaying ? `${branding?.introMusicTitle || 'Musique VIP'} 🎵 (Mettre en pause)` : `Lancer ${branding?.introMusicTitle || 'Musique VIP'} 🎵`}
             >
               {audioPlaying ? (
                 <div className="flex items-end gap-0.5 h-3.5 w-3.5">
@@ -773,8 +773,8 @@ export default function App() {
               ) : (
                 <VolumeX className="w-3.5 h-3.5" />
               )}
-              <span className="font-mono text-[9px] font-bold uppercase tracking-wider hidden xs:inline">
-                {audioPlaying ? 'MAES • INTER' : 'SON 🔇'}
+              <span className="font-mono text-[9px] font-bold uppercase tracking-wider hidden xs:inline max-w-[130px] truncate">
+                {audioPlaying ? (branding?.introMusicTitle ? branding.introMusicTitle.toUpperCase().slice(0, 14) : 'MAES • INTER') : 'SON 🔇'}
               </span>
             </button>
 

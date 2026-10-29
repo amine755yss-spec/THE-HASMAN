@@ -33,7 +33,13 @@ import {
   Send,
   ChevronUp,
   ChevronDown,
-  User
+  User,
+  Music,
+  Volume2,
+  VolumeX,
+  Play,
+  Square,
+  Headphones
 } from 'lucide-react';
 import { VideoItem, Order, BrandingSettings, SectionTitle, WhitelistItem, Reward, PromoCode, PendingApproval, MarqueeItem, DEFAULT_MARQUEE_CONFIG, SupportedCity, SUPPORTED_CITIES, QuantityOption, QUANTITY_OPTIONS, QuantityPricing } from '../types';
 import { addProduct, deleteProduct, getOrders, updateOrderStatus, deleteOrder, getBrandingSettings, updateBrandingSettings, uploadFileRaw, getWhitelist, addWhitelistItem, deleteWhitelistItem, setAdminPasswordToken, clearAdminPasswordToken, getConnectionLogs, deleteConnectionLog, triggerTelegramBroadcast, getTelegramBroadcastStatus, resetTelegramBroadcastStatus, undoLastTelegramBroadcast, editLastTelegramBroadcast, deleteTelegramMessageManual, editTelegramMessageManual, getAllUsersProfile, getRewards, saveReward, deleteReward, getPromoCodes, savePromoCode, deletePromoCode, getPendingApprovals, approvePendingRequest, rejectPendingRequest } from '../db';
@@ -661,6 +667,41 @@ export default function AdminPanel({
   const [uploadingLogo, setUploadingLogo] = useState<boolean>(false);
   const [uploadingBgLogo, setUploadingBgLogo] = useState<boolean>(false);
   const [uploadingPromoImg, setUploadingPromoImg] = useState<boolean>(false);
+  const [uploadingAudio, setUploadingAudio] = useState<boolean>(false);
+  const [adminAudioPlaying, setAdminAudioPlaying] = useState<boolean>(false);
+  const adminAudioRef = useRef<HTMLAudioElement | null>(null);
+
+  const toggleAdminAudio = (targetUrl?: string) => {
+    const playUrl = targetUrl || settings.bgAudioUrl || '/maes_international.mp3';
+    if (!adminAudioRef.current) {
+      adminAudioRef.current = new Audio(playUrl);
+      adminAudioRef.current.loop = true;
+      adminAudioRef.current.volume = 0.5;
+      adminAudioRef.current.onended = () => setAdminAudioPlaying(false);
+    }
+
+    if (adminAudioPlaying) {
+      adminAudioRef.current.pause();
+      setAdminAudioPlaying(false);
+    } else {
+      if (adminAudioRef.current.src !== playUrl) {
+        adminAudioRef.current.src = playUrl;
+      }
+      adminAudioRef.current.play()
+        .then(() => setAdminAudioPlaying(true))
+        .catch(e => console.warn('Admin audio preview play error:', e));
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      if (adminAudioRef.current) {
+        adminAudioRef.current.pause();
+        adminAudioRef.current = null;
+      }
+    };
+  }, []);
+
   const [confirmingDeleteId, setConfirmingDeleteId] = useState<string | null>(null);
   const [confirmingOrderDeleteId, setConfirmingOrderDeleteId] = useState<string | null>(null);
 
@@ -2900,6 +2941,224 @@ export default function AdminPanel({
                       <video src={settings.introVideoUrl} autoPlay loop muted playsInline className="h-full object-contain" />
                     </div>
                   ) : null}
+                </div>
+
+                {/* 🎵 BANDE-SON VIP & MUSIQUE D'AMBIANCE (MODIFIABLE DIRECTEMENT PAR L'ADMIN) */}
+                <div className="border border-purple-500/35 bg-gradient-to-br from-purple-950/40 via-[#0A0514] to-black p-4 rounded-xl space-y-3.5 shadow-xl">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Music className="w-4 h-4 text-purple-400" />
+                      <span className="block text-[10px] font-mono text-purple-300 uppercase tracking-widest font-black">
+                        🎵 BANDE-SON VIP & MUSIQUE D'AMBIANCE
+                      </span>
+                    </div>
+                    <span className="text-[8px] font-mono text-purple-300 bg-purple-950/70 border border-purple-700/60 px-2.5 py-0.5 rounded-full font-bold">
+                      MODIFIABLE PAR L'ADMIN
+                    </span>
+                  </div>
+
+                  <p className="text-[8.5px] font-mono text-zinc-300 leading-normal">
+                    Changez la musique qui se joue automatiquement lorsque vos clients ouvrent la boutique. Vous pouvez téléverser un fichier MP3 depuis votre téléphone/PC, coller un lien direct ou choisir un préréglage ci-dessous.
+                  </p>
+
+                  {/* Titre du Morceau */}
+                  <div className="space-y-1">
+                    <label className="text-gray-300 block font-bold text-[8px] uppercase">
+                      TITRE AFFICHÉ DU MORCEAU (EX: Maes - International, Morad, etc.) :
+                    </label>
+                    <input
+                      type="text"
+                      value={settings.introMusicTitle || ''}
+                      onChange={(e) => setBrandingSettings({ ...settings, introMusicTitle: e.target.value })}
+                      placeholder="Maes — INTERPOL (Trafic International)"
+                      className="w-full text-[9px] py-2 px-2.5 rounded-lg bg-black border border-purple-900/40 focus:border-purple-400 text-white outline-none font-mono"
+                    />
+                  </div>
+
+                  {/* Lien Audio ou MP3 */}
+                  <div className="space-y-1.5">
+                    <label className="text-gray-300 block font-bold text-[8px] uppercase">
+                      FICHIER AUDIO / LIEN MP3 DU MORCEAU :
+                    </label>
+                    <input
+                      type="text"
+                      value={settings.bgAudioUrl || ''}
+                      onChange={(e) => setBrandingSettings({ ...settings, bgAudioUrl: e.target.value })}
+                      placeholder="/maes_international.mp3 ou lien URL direct"
+                      className="w-full text-[9px] py-2 px-2.5 rounded-lg bg-black border border-purple-900/40 focus:border-purple-400 text-white outline-none font-mono"
+                    />
+                    
+                    <div className="flex flex-wrap items-center gap-2 pt-1">
+                      {/* Upload MP3 button */}
+                      <button
+                        type="button"
+                        disabled={uploadingAudio}
+                        onClick={() => {
+                          const fileInput = document.createElement('input');
+                          fileInput.type = 'file';
+                          fileInput.accept = 'audio/*,.mp3,.wav,.m4a,.ogg';
+                          fileInput.onchange = async (e: any) => {
+                            const file = e.target.files?.[0];
+                            if (file) {
+                              setUploadingAudio(true);
+                              setUploadProgress('0%');
+                              triggerHaptic('medium');
+                              try {
+                                const publicUrl = await performDetailedUpload(file);
+                                const trackName = file.name.replace(/\.[^/.]+$/, '');
+                                setBrandingSettings(prev => ({ 
+                                  ...prev, 
+                                  bgAudioUrl: publicUrl,
+                                  introMusicTitle: prev.introMusicTitle || trackName
+                                }));
+                                triggerHaptic('success');
+                                setSuccessMsg(`Morceau "${file.name}" chargé avec succès !`);
+                                setTimeout(() => setSuccessMsg(''), 4000);
+                              } catch (err) {
+                                console.error('Audio upload error:', err);
+                                setErrorMsg('Erreur lors du téléversement audio...');
+                                setTimeout(() => setErrorMsg(''), 4000);
+                              } finally {
+                                setUploadingAudio(false);
+                                setUploadProgress('');
+                              }
+                            }
+                          };
+                          fileInput.click();
+                        }}
+                        className="px-3 py-1.5 bg-purple-950/60 border border-purple-600/40 hover:border-purple-400 rounded-lg font-bold text-[8px] text-purple-200 hover:text-white transition cursor-pointer flex items-center gap-1.5 disabled:opacity-50"
+                      >
+                        <Upload className="w-3 h-3 text-purple-400" />
+                        <span>{uploadingAudio ? `Téléversement (${uploadProgress})...` : 'Uploader un fichier MP3 (Téléphone / PC)'}</span>
+                      </button>
+
+                      {/* Play Preview button */}
+                      <button
+                        type="button"
+                        onClick={() => toggleAdminAudio()}
+                        className={`px-3 py-1.5 rounded-lg border font-bold text-[8px] transition cursor-pointer flex items-center gap-1.5 ${
+                          adminAudioPlaying
+                            ? 'bg-emerald-950/80 border-emerald-500 text-emerald-300'
+                            : 'bg-zinc-900 border-zinc-700 text-zinc-300 hover:text-white'
+                        }`}
+                      >
+                        {adminAudioPlaying ? (
+                          <>
+                            <Square className="w-3 h-3 fill-current" />
+                            <span>Arrêter l'écoute</span>
+                          </>
+                        ) : (
+                          <>
+                            <Play className="w-3 h-3 fill-current text-purple-400" />
+                            <span>Tester / Écouter le morceau</span>
+                          </>
+                        )}
+                      </button>
+
+                      {settings.bgAudioUrl && (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            if (adminAudioRef.current) adminAudioRef.current.pause();
+                            setAdminAudioPlaying(false);
+                            setBrandingSettings({ ...settings, bgAudioUrl: '', introMusicTitle: '' });
+                          }}
+                          className="text-red-400 hover:text-red-300 text-[8px] font-mono cursor-pointer underline ml-auto"
+                        >
+                          Effacer le son
+                        </button>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* 1-Click Track Presets */}
+                  <div className="space-y-1.5 pt-2 border-t border-purple-900/30">
+                    <span className="text-[7.5px] font-mono uppercase text-purple-300 font-bold block">
+                      ⚡ PRÉRÉGLAGES 1-CLIC (CHANGEMENT IMMÉDIAT SANS TÉLÉVERSEMENT) :
+                    </span>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          triggerHaptic('medium');
+                          setBrandingSettings(prev => ({
+                            ...prev,
+                            bgAudioUrl: '/maes_international.mp3',
+                            introMusicTitle: 'Maes — INTERPOL (Trafic International)'
+                          }));
+                          if (adminAudioPlaying) {
+                            toggleAdminAudio('/maes_international.mp3');
+                          }
+                          setSuccessMsg('Morceau Maes Interpol sélectionné !');
+                          setTimeout(() => setSuccessMsg(''), 3000);
+                        }}
+                        className={`p-2.5 rounded-lg border text-left transition cursor-pointer text-[8px] font-mono ${
+                          settings.bgAudioUrl === '/maes_international.mp3' || (!settings.bgAudioUrl && settings.introMusicTitle?.includes('Maes'))
+                            ? 'bg-purple-900/40 border-purple-400 text-white shadow-[0_0_12px_rgba(168,85,247,0.35)]'
+                            : 'bg-black/40 border-white/10 text-zinc-400 hover:text-white hover:border-purple-500/40'
+                        }`}
+                      >
+                        <div className="font-bold text-purple-300 flex items-center gap-1">
+                          <span>🎵 Maes — INTERPOL</span>
+                        </div>
+                        <div className="text-[7px] text-zinc-500 mt-0.5">Trafic International (Officiel)</div>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => {
+                          triggerHaptic('medium');
+                          setBrandingSettings(prev => ({
+                            ...prev,
+                            bgAudioUrl: '/hashman_vip_track.mp3',
+                            introMusicTitle: 'Maes — Omerta VIP Drop'
+                          }));
+                          if (adminAudioPlaying) {
+                            toggleAdminAudio('/hashman_vip_track.mp3');
+                          }
+                          setSuccessMsg('Morceau Maes Omerta sélectionné !');
+                          setTimeout(() => setSuccessMsg(''), 3000);
+                        }}
+                        className={`p-2.5 rounded-lg border text-left transition cursor-pointer text-[8px] font-mono ${
+                          settings.introMusicTitle?.includes('Omerta')
+                            ? 'bg-purple-900/40 border-purple-400 text-white shadow-[0_0_12px_rgba(168,85,247,0.35)]'
+                            : 'bg-black/40 border-white/10 text-zinc-400 hover:text-white hover:border-purple-500/40'
+                        }`}
+                      >
+                        <div className="font-bold text-amber-300 flex items-center gap-1">
+                          <span>🔥 Maes — Omerta Drop</span>
+                        </div>
+                        <div className="text-[7px] text-zinc-500 mt-0.5">Énergie Club & VIP</div>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => {
+                          triggerHaptic('medium');
+                          setBrandingSettings(prev => ({
+                            ...prev,
+                            bgAudioUrl: 'https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3',
+                            introMusicTitle: 'VIP Lofi Chill Moroccan Hash'
+                          }));
+                          if (adminAudioPlaying) {
+                            toggleAdminAudio('https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3');
+                          }
+                          setSuccessMsg('Morceau Lofi Chill sélectionné !');
+                          setTimeout(() => setSuccessMsg(''), 3000);
+                        }}
+                        className={`p-2.5 rounded-lg border text-left transition cursor-pointer text-[8px] font-mono ${
+                          settings.introMusicTitle?.includes('Lofi')
+                            ? 'bg-purple-900/40 border-purple-400 text-white shadow-[0_0_12px_rgba(168,85,247,0.35)]'
+                            : 'bg-black/40 border-white/10 text-zinc-400 hover:text-white hover:border-purple-500/40'
+                        }`}
+                      >
+                        <div className="font-bold text-cyan-300 flex items-center gap-1">
+                          <span>☕ Chill Lofi Hash VIP</span>
+                        </div>
+                        <div className="text-[7px] text-zinc-500 mt-0.5">Ambiance posée & discrète</div>
+                      </button>
+                    </div>
+                  </div>
                 </div>
 
                 {/* GROS TITRES / SECTION TITLES */}
